@@ -10,6 +10,23 @@ The Kimblery Howe's Team
     4. Ivan
     5. William
     6. Harrison
+    
+Concept
+  Description
+    - Given user input pre-requisite classes and major, the app will construct a viable schedule from the given
+      course schedule booklet. The app will construct both a visual and text file of this schedule to save 
+      students time and effort when scheduling their classe.
+  Core Features
+    - Auto creates viable schedule for any given semester
+    - Creates a visual and text representation of the schedule
+    - Scrapes schedule booklet from school website
+  Viable Features
+    - May work for any university with upscalling of backend and running python script for other booklets
+    - Store user data on backend to save already taken classes for easy scheduling for repeat users
+  Stretch Features
+    - Integrating ratemyprofessor reviews as part of class weighting process
+    - 
+  Expected Technologies
 
 System Requirements
 
