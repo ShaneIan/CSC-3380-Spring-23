@@ -1,38 +1,86 @@
-Proposal 
+Introduction <Milestone 1: Proposal> 
 
+When deciding what classes to schedule each semester, it can take a significant amount of time for students to figure out what class sections need to be taken in order to avoid class timing conflicts or what overall schedule would best accommodate a student’s time preferences. Kimberly Howe proposes an automatic class scheduler that suggests an optimal class schedule based on what classes a user inputs and their selected preferences.  The program will pull data from the LSU schedule booklet and output possible schedules for the user, giving different options such as a clustered schedule, morning schedule, night schedule, etc.  The program would then display the appropriate section numbers to the user for each schedule configuration, which the user can then use as an aid to schedule their classes through the LSU Schedule Request platform. 
 
+Core features include a third-party API to parse the LSU course booklet and find the courses that the user inputs, a user interface to input classes and build a schedule with no course conflicts, and an ability to categorize schedule builds based on possible user preferences.  The core architecture of the system will be built using Java.	 
 
-The Kimblery Howe's Team
-  Team Members:
-    1. Raedan - Team Leader
-    2. Ian
-    3. Collin
-    4. Ivan
-    5. William
-    6. Harrison
-    
-Concept
-  Description
-    - Given user input pre-requisite classes and major, the app will construct a viable schedule from the given
-      course schedule booklet. The app will construct both a visual and text file of this schedule to save 
-      students time and effort when scheduling their classe.
-  Core Features
-    - Auto creates viable schedule for any given semester
-    - Creates a visual and text representation of the schedule
-    - Scrapes schedule booklet from school website
-  Viable Features
-    - May work for any university with upscalling of backend and running python script for other booklets
-    - Store user data on backend to save already taken classes for easy scheduling for repeat users
-  Stretch Features
-    - Integrating ratemyprofessor reviews as part of class weighting process
-    - 
-  Expected Technologies
+ 
 
-System Requirements
+[Provide a 1-2 paragraph description of the problem and proposed solution. You will want to include the technologies that are incorporated within your project design and implementation plan.] 
 
+ 
 
-Project Management
-  
-  Continuity of Operations Plan 
-  
-  Project Plan
+ 
+
+ 
+
+[Include a figure that includes the logos of the technologies that your project employs. IMPORTANT: The core of the system architecture must be implemented in an object-oriented programming language (i.e., Java, C#, or C++) ]  
+
+Core Features: 
+
+Ability to parse the LSU course booklet and store course data. 
+
+A user interface to input classes and build a schedule with no course conflicts. 
+
+Displays suggested schedule. 
+
+Viable Features: 
+
+Displays multiple schedule options (if available) to reflect various schedule preferences. 
+
+Informs user when a schedule option is not possible (e.g. no morning classes) 
+
+Stretch Features [optional] 
+
+RateMyProfessor integration to form a schedule with the highest rated professors for those classes. 
+
+User accounts that store historical schedules. 
+
+ 
+ 
+
+The Kimberly Howe Team < Milestone 1: Proposal > 
+
+[Provide the team structure. This should include the team member name, role(s), and responsibilities. If team members have different roles/responsibilities for different project milestones, these should be listed by milestone. This section should be provided during the Proposal phase, but it should be updated as roles change for different milestones. The team GitHub link should be included in this section.] 
+
+Team Name: The Kimberly Howe Team 
+
+Team Members: Raedan Stephens, Collin Bueche, Harrison Juneau, Ian Shaneyfelt, William Duke, and Ivan Larsen 
+
+Team Leader: Raedan Stephens 
+
+GitHub link: https://github.com/ShaneIan/CSC-3380-Spring-23.git  
+
+ 
+ 
+
+System Requirements < Milestone 1: Proposal > 
+
+Requirements [optional] 
+
+ [A list of system requirements. This should include, at a minimum, the requirements imposed by the class project.] 
+
+System architecture will be implemented in an object-oriented programming language, utilizing OO designs and programming constructs. 
+
+ 
+
+User Stories  
+
+[A list of 1-2 user stories; additional user stories are optional. ] 
+
+User Story #1 
+
+As a student, I want to be able to see what sections of classes I need to take to avoid class time overlaps. 
+
+User Story #2 
+
+As a student, I want to see several schedule options that I have that conform with my schedule preferences, e.g., a schedule with primarily morning classes. 
+
+ 
+ 
+
+Project Management 
+
+Continuity of Operations Plan (COOP) < Milestone 1: Proposal> 
+
+In the event of unforeseen circumstances that prevent in-person meetings for some or all members of the group, a Discord server has been set up for written, voice, and video chatting communications. This platform allows for delegation of tasks and collaboration on specific programming and design tasks without the need to do so in person if virtual collaboration becomes necessary. If a team member becomes unavailable, temporarily or permanently, the Discord server can serve as the center of communication to reorganize and redelegate tasks.  
