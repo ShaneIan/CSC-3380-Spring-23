@@ -1,6 +1,6 @@
 package ScheduleAnalyzer;
 import ScheduleObjectBuilder.*;
-
+//Class specifically for analyzing the amount of time between classes each day
 public class ScheduleSpreadAnalyzer implements ScheduleAnalyzer{
     private Schedule[] schedules;
 
