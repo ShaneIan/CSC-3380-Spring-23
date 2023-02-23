@@ -1,6 +1,6 @@
 package CourseObjectBuilder;
 
-public class Class {
+public class Course {
     private Boolean isFull;
     private String courseNumber;
     private String courseTitle;
@@ -10,7 +10,7 @@ public class Class {
     private String instructor;
     private Lab lab;
 
-    public Class(Boolean isFull, String courseNumber, String courseTitle, int creditHours, String classTime, String classDays, String instructor) {
+    public Course(Boolean isFull, String courseNumber, String courseTitle, int creditHours, String classTime, String classDays, String instructor) {
         isFull = this.isFull;
         courseNumber = this.courseNumber;
         courseTitle = this.courseTitle;
@@ -21,7 +21,7 @@ public class Class {
         lab = null;
     }
 
-    public Class(Boolean isFull, String courseNumber, String courseTitle, int creditHours, String classTime, String classDays, String instructor, Lab lab) {
+    public Course(Boolean isFull, String courseNumber, String courseTitle, int creditHours, String classTime, String classDays, String instructor, Lab lab) {
         isFull = this.isFull;
         courseNumber = this.courseNumber;
         courseTitle = this.courseTitle;
