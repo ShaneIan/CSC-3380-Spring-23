@@ -9,7 +9,7 @@ public class Lab {
         labDays = this.labDays;
     }
 
-    public String getLabTime() {
+    public String getLabTimes() {
         return labTime;
     }
 

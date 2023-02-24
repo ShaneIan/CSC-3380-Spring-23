@@ -8,6 +8,7 @@ public class Course {
     private String classTime;
     private String classDays;
     private String instructor;
+    private Boolean hasLab;
     private Lab lab;
 
     public Course(Boolean isFull, String courseNumber, String courseTitle, int creditHours, String classTime, String classDays, String instructor) {
@@ -18,6 +19,7 @@ public class Course {
         classTime = this.classTime;
         classDays = this.classDays;
         instructor = this.instructor;
+        hasLab = false;
         lab = null;
     }
 
@@ -29,6 +31,7 @@ public class Course {
         classTime = this.classTime;
         classDays = this.classDays;
         instructor = this.instructor;
+        hasLab= true;
         lab = this.lab;
     }
 
@@ -54,5 +57,13 @@ public class Course {
 
     public String getClassDays() {
         return classDays;
+    }
+
+    public Boolean isLabCourse() {
+        return hasLab;
+    }
+
+    public Lab getLab() {
+        return lab;
     }
 }
