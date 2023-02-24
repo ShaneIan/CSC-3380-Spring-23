@@ -6,10 +6,10 @@ public class DataManager {
     
     //client sends lists of demands for scheudler
     //create a sql query from those and return data
-    public void buildQuerryFromSearch(){
+    public void buildQueryFromSearch(){
 
     }
-    //creates the query
+    //creates the SQL query
     public void querySQLServer(){
 
     }
@@ -21,6 +21,10 @@ public class DataManager {
     //given user query creates a matching set of schedules
     //that fit some given set of query characteristics
     public void compileSchedulesFromQuery(){
+
+    }
+
+    public void getTopRankedSchedules() {
 
     }
 }
