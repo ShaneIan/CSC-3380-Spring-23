@@ -23,17 +23,18 @@ public class Schedule {
 
     public HashMap<String, String> compileClassTimes() {
         HashMap<String, String> classTimeAndDayMap = new HashMap<String, String>();
-        String daysStr, timesStr;
+        String daysAndTimeStr, daysStr, timesStr;
         for (Course course: courses) {
             daysStr = course.getClassDays();
             timesStr = course.getClassTime();
-            course.getClassTime()
+            course.getClassTime();
             if (course.isLabCourse()) {
                 Lab lab = course.getLab();
                 daysStr += lab.getLabDays();
                 timesStr += lab.getLabTimes();
             }
-            classTimes.put(course.getCourseTitle(), dayAndTimeStr);
+            daysAndTimeStr = daysStr + timesStr;
+            classTimeAndDayMap.put(course.getCourseTitle(), daysAndTimeStr);
         }
         return classTimeAndDayMap;
     }
