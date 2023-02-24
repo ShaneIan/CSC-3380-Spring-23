@@ -1,25 +1,24 @@
 package ClientManager;
 
-<<<<<<< HEAD
-public class RequestManager {
+public class RequestManager {   
 
-    public void takeUserSearch(){
+    //Method callable on html form submission to handle form submit
+    public void handleCourseSearch() {
+
+    }
+
+    //Return constructed schedules to the user interface
+    public void serveScheduleData() {
+
+    }
+
+    //Collect html form data and format it into a form usable by CourseDataManager
+    public void processForm(){
+
+    }
+
+    //Using search information, construct a dataManager to query course database and construct a viable schedules
+    public void buildDataManagerFromSearch(){
         
     }
-
-    public void showOptimalSchedule(){
-        
-    }
-    
-=======
-public class RequestManager {    
-    public void processForm() {
-
-    }
-
-    public void returnScheduleDataToFrontend() {
-        
-    }
-
->>>>>>> d7527eedf9fbf5d0e0a8f0cab562b6f38e846b72
 }
