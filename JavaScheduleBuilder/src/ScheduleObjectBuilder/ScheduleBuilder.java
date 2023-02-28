@@ -10,8 +10,18 @@ public class ScheduleBuilder {
         private ScheduleSpreadAnalyzer timeSpreadRanker;
         private ScheduleTimeAnalyzer timeDensityRanker;
         
-        public void findViableSchedules() {
+        public ConflictMatrix() {
+                boolean ConflictArray[][] = new boolean [5][29];
+                for (boolean[] Day: ConflictArray)
+                {
+                        for (boolean Time: Day){
+                                Time=true;
+                        }
 
+                }
+        }
+        public void findViableSchedules() {
+        
         }
 
         public void buildSchedule() {
