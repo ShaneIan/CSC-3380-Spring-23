@@ -21,6 +21,24 @@ public class ScheduleBuilder {
                 }
                 return ConflictArray;
         }
+
+        public boolean doClassTimesConflict(Course NewClass) {
+                //String ClassDayArray[] = NewClass.getClassDays();
+                //int ClassTimeArray[] = NewClass.getClassTime();
+                //for (String[] Day: ClassDayArray)
+                //{
+                //        while ()
+                //}
+                //
+                // while (i <= newclass(time))
+                // if newclass(time) = already taken part of array (already schedule class)
+                // then conflict, return true
+                // if no time conflict then call addclass
+                // if ConflictArray[1][]
+                // if newclass 
+                return boolean;
+        }
+
         public void findViableSchedules() {
         
         }
@@ -29,8 +47,8 @@ public class ScheduleBuilder {
 
         }
 
-        public void doClassTimesConflict() {
-
+        public void AddClass() {
+                
         }
 
         public Schedule[] returnViableSchedules() {
