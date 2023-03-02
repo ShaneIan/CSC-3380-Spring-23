@@ -10,15 +10,16 @@ public class ScheduleBuilder {
         private ScheduleSpreadAnalyzer timeSpreadRanker;
         private ScheduleTimeAnalyzer timeDensityRanker;
         
-        public ConflictMatrix() {
+        public boolean[][] BuildConflictMatrix() {
                 boolean ConflictArray[][] = new boolean [5][29];
                 for (boolean[] Day: ConflictArray)
                 {
                         for (boolean Time: Day){
                                 Time=true;
                         }
-
+                                
                 }
+                return ConflictArray;
         }
         public void findViableSchedules() {
         
