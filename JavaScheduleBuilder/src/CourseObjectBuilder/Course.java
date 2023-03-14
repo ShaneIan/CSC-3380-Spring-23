@@ -1,4 +1,5 @@
 package CourseObjectBuilder;
+import java.util.*;
 
 public class Course {
     private Boolean isFull;
@@ -6,12 +7,12 @@ public class Course {
     private String courseTitle;
     private int creditHours;
     private String classTime;
-    private String classDays;
+    private String[] classDays;
     private String instructor;
     private Boolean hasLab;
     private Lab lab;
 
-    public Course(Boolean isFull, String courseNumber, String courseTitle, int creditHours, String classTime, String classDays, String instructor) {
+    public Course(Boolean isFull, String courseNumber, String courseTitle, int creditHours, String classTime, String[] classDays, String instructor) {
         isFull = this.isFull;
         courseNumber = this.courseNumber;
         courseTitle = this.courseTitle;
@@ -23,7 +24,7 @@ public class Course {
         lab = null;
     }
 
-    public Course(Boolean isFull, String courseNumber, String courseTitle, int creditHours, String classTime, String classDays, String instructor, Lab lab) {
+    public Course(Boolean isFull, String courseNumber, String courseTitle, int creditHours, String classTime, String[] classDays, String instructor, Lab lab) {
         isFull = this.isFull;
         courseNumber = this.courseNumber;
         courseTitle = this.courseTitle;
@@ -55,7 +56,7 @@ public class Course {
         return classTime;
     }
 
-    public String getClassDays() {
+    public String[] getClassDays() {
         return classDays;
     }
 
@@ -66,4 +67,25 @@ public class Course {
     public Lab getLab() {
         return lab;
     }
+
+    public HashMap<String, String> compileClassTimes() {
+        HashMap<String, String> classTimeAndDayMap = new HashMap<String, String>();
+        String[] daysArr;
+        String timeStr;
+        daysArr = this.classDays;
+        timeStr = this.classTime;
+        for (String day: daysArr) {
+            classTimeAndDayMap.put(day, timeStr);
+        }
+        if (this.isLabCourse()) {
+            Lab lab = this.getLab();
+            String[] labDays = lab.getLabDays();
+            String labTime = lab.getLabTimes();
+            for (String day: labDays) {
+                classTimeAndDayMap.put(day, labTime);
+            }
+        }
+        return classTimeAndDayMap;
+    }
+
 }
