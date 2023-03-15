@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Automatic Scheduler Builder</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="CSC-3380-Spring-23/JavaScheduleBuilder/src/ClientManager/styles.css">
+</head>
+
+<body>
+    <header id="header" class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="logo">
+            <img src="https://www.lsu.edu/_resources_fierce/svgs/lsu-logo.svg" class="menu_logo" alt="Louisiana State University"></a>
+        </div>
+    </header>
+    <div class="TitleHeader">
+        <h1>LSU Automatic Scheduler</h1>
+    </div class="ClassSearch">
+    <div>
+        <button onclick="add()">Add</button>
+        <button onclick="remove()">Remove</button>
+    </div>
+    <input type="text">
+    <div id="new_chq"></div>
+        <form>
+            <input type="hidden" value="1" id="total_chq">
+            <script language="JavaScript" type="text/javascript">
+                function add(){
+                    var new_chq_no = parseInt($('#total_chq').val())+1;
+                    var new_input="<input type='text' id='new_"+new_chq_no+"'>";
+                    $('#new_chq').append(new_input);
+                    $('#total_chq').val(new_chq_no)
+                    }
+                function remove(){
+                    var last_chq_no = $('#total_chq').val();
+                    if(last_chq_no>1){
+                        $('#new_'+last_chq_no).remove();
+                        $('#total_chq').val(last_chq_no-1);
+                    }
+                }
+            </script>
+        </form>
+    </div>
+    <div id="searchButton">
+        <button>Search</button>
+    </div>
+</body>
+
+</html>

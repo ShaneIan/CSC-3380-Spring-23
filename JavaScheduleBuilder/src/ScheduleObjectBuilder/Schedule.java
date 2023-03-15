@@ -10,7 +10,6 @@ public class Schedule {
     public Schedule(Course[] courses) {
         courses = this.courses;
         totalHours = calculateTotalHours();
-        classTimes = compileClassTimes();
     }
 
     public int calculateTotalHours() {
@@ -19,24 +18,6 @@ public class Schedule {
             numScheduleHours += course.getCreditHours();
         }
         return numScheduleHours;
-    }
-
-    public HashMap<String, String> compileClassTimes() {
-        HashMap<String, String> classTimeAndDayMap = new HashMap<String, String>();
-        String daysAndTimeStr, daysStr, timesStr;
-        for (Course course: courses) {
-            daysStr = course.getClassDays();
-            timesStr = course.getClassTime();
-            course.getClassTime();
-            if (course.isLabCourse()) {
-                Lab lab = course.getLab();
-                daysStr += lab.getLabDays();
-                timesStr += lab.getLabTimes();
-            }
-            daysAndTimeStr = daysStr + timesStr;
-            classTimeAndDayMap.put(course.getCourseTitle(), daysAndTimeStr);
-        }
-        return classTimeAndDayMap;
     }
 
     public Course[] getCourses() {

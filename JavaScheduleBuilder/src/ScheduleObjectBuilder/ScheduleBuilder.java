@@ -15,7 +15,7 @@ public class ScheduleBuilder {
                 for (boolean[] Day: ConflictArray)
                 {
                         for (boolean Time: Day){
-                                Time=true;
+                                Time = true;
                         }
                                 
                 }
@@ -36,7 +36,7 @@ public class ScheduleBuilder {
                 // if no time conflict then call addclass
                 // if ConflictArray[1][]
                 // if newclass 
-                return boolean;
+                return false;
         }
 
         public void findViableSchedules() {

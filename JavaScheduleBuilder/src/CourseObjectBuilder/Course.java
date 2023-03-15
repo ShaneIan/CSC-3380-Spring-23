@@ -68,6 +68,9 @@ public class Course {
         return lab;
     }
 
+    //Returns a map with class day as a key and class time as the value
+    //Accounts for lab days and times as part of the same map
+    //Ex: classTimeAndDayMap = {'M':'1:30-2:30', 'W':'1:30-2:30', 'F':'1:30-2:30', 'T':'1:30-4:30'}
     public HashMap<String, String> compileClassTimes() {
         HashMap<String, String> classTimeAndDayMap = new HashMap<String, String>();
         String[] daysArr;
