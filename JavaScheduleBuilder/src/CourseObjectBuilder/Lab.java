@@ -1,19 +1,9 @@
 package CourseObjectBuilder;
 
-public class Lab {
-    private String labTime;
-    private String[] labDays;
+public class Lab extends LearningSession{
 
-    public Lab(String labTime, String[] labDays) {
-        labTime = this.labTime;
-        labDays = this.labDays;
+    public Lab(String labTime, String labDays) {
+        super(labTime, labDays);
     }
-
-    public String getLabTimes() {
-        return labTime;
-    }
-
-    public String[] getLabDays() {
-        return labDays;
-    }
+    
 }
