@@ -1,6 +1,4 @@
 package CourseObjectBuilder;
-import java.util.*;
-import java.util.regex.*;
 
 public class Course extends LearningSession{
     private Boolean isFull;
