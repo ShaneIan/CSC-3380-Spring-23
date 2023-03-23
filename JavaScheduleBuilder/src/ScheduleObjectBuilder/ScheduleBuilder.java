@@ -10,45 +10,90 @@ public class ScheduleBuilder {
         private ScheduleSpreadAnalyzer timeSpreadRanker;
         private ScheduleTimeAnalyzer timeDensityRanker;
         
-        public boolean[][] BuildConflictMatrix() {
-                boolean ConflictArray[][] = new boolean [5][29];
-                for (boolean[] Day: ConflictArray)
+        public ScheduleBuilder(Course[][] courses) {
+                
+        }
+
+        public String[][] BuildScheduleMatrix() {
+                String[][] scheduleArray = new String[5][31];
+                for (String[] Day: scheduleArray)
                 {
-                        for (boolean Time: Day){
-                                Time = true;
+                        for (String TimeSlot: Day){
+                                TimeSlot = "-";
                         }
                                 
                 }
-                return ConflictArray;
+                return scheduleArray;
         }
 
-        public boolean doClassTimesConflict(Course NewClass) {
-                //String ClassDayArray[] = NewClass.getClassDays();
-                //int ClassTimeArray[] = NewClass.getClassTime();
-                //for (String[] Day: ClassDayArray)
-                //{
-                //        while ()
-                //}
-                //
-                // while (i <= newclass(time))
-                // if newclass(time) = already taken part of array (already schedule class)
-                // then conflict, return true
-                // if no time conflict then call addclass
-                // if ConflictArray[1][]
-                // if newclass 
-                return false;
+        //Takes preexisting a schedule array and the course to be checked for conflicts
+        //and iterates through the course's SessionDayTimeMap to see if the class times per day
+        //coincide with any class times in the schedule array by checking all time indexes between (and including) 
+        //the startTimeIndex and endTimeIndex for each day in the SessionDayTimeMap, where any string other than "-" 
+        //indicates a filled timeslot
+        public boolean checkClassTimesConflict(String[][] scheduleArray, Course newClass) {
+                HashMap<Integer, int[]> classTimes = newClass.getSessionDayTimeMap();
+                int day, startTime, endTime;
+                for (Map.Entry<Integer, int[]> entry: classTimes.entrySet()) {
+                        day = entry.getKey();
+                        startTime = entry.getValue()[0];
+                        endTime = entry.getValue()[1];
+                        for (int i = startTime; i <= endTime; i++) {
+                                if (!scheduleArray[day][i].equals("-")) {
+                                        return false;
+                                }
+                        }
+                }
+                if (newClass.isLabCourse()) {
+                        HashMap<Integer, int[]> labTimes = newClass.getSessionDayTimeMap();
+                        for (Map.Entry<Integer, int[]> entry: labTimes.entrySet()) {
+                                day = entry.getKey();
+                                startTime = entry.getValue()[0];
+                                endTime = entry.getValue()[1];
+                                for (int i = startTime; i <= endTime; i++) {
+                                        if (!scheduleArray[day][i].equals("-")) {
+                                                return false;
+                                        }
+                                }
+                        }
+                }
+                return true;
         }
 
-        public void findViableSchedules() {
-        
+        //Takes a preexisting schedule array and the course to be added
+        //and iterates through the course's SessionDayTimeMap to add the class times per day to the schedule array by using
+        //the startTimeIndex and endTimeIndex for each day in the SessionDayTimeMap, and changing the schedule array 
+        //timeslot string to the course title
+        public void AddClass(String[][] scheduleArray, Course newClass) {
+                HashMap<Integer, int[]> classTimes = newClass.getSessionDayTimeMap();
+                int day, startTime, endTime;
+                for (Map.Entry<Integer, int[]> entry: classTimes.entrySet()) {
+                        day = entry.getKey();
+                        startTime = entry.getValue()[0];
+                        endTime = entry.getValue()[1];
+                        for (int i = startTime; i <= endTime; i++) {
+                                scheduleArray[day][i] = newClass.getCourseTitle();
+                        }
+                }
+                if (newClass.isLabCourse()) {
+                        HashMap<Integer, int[]> labTimes = newClass.getSessionDayTimeMap();
+                        for (Map.Entry<Integer, int[]> entry: labTimes.entrySet()) {
+                                day = entry.getKey();
+                                startTime = entry.getValue()[0];
+                                endTime = entry.getValue()[1];
+                                for (int i = startTime; i <= endTime; i++) {
+                                        scheduleArray[day][i] = newClass.getCourseTitle();
+                                }
+                        }
+                }
         }
 
-        public void buildSchedule() {
-
+        public Schedule[] findViableSchedules(Course[][] allCourseAndSections) {
+                return new Schedule[] {};
         }
 
-        public void AddClass() {
-                
+        public Schedule buildSchedule() {
+                return null;
         }
 
         public Schedule[] returnViableSchedules() {
