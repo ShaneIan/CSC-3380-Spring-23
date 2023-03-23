@@ -5,7 +5,7 @@ import java.util.*;
 public class Schedule {
     private ArrayList<Course> courses;
     private int totalHours;
-    private HashMap<String, String> classTimes;
+    private HashMap<Integer, ArrayList<int[]>> classTimes;
     private String[][] scheduleMatrix;
 
 
@@ -104,11 +104,30 @@ public class Schedule {
         return numScheduleHours;
     }
 
+    //Compile all course time hashmaps into one dayTime hashmap for a schedule
+    //Ex. A schedule with course dayTime maps {0: [13, 15], 2: [13, 15], 4: [13, 15]}, 
+    //{0: [15, 17], 2: [15, 17], 4: [15, 17]}, and {1: [13, 15], 3: [13, 15]}
+    //should return the schedule dayTime map {0: [[13, 15], [15, 17]], 1: [[13, 15]], 2: [[13, 15], [15, 17]], 3: [[13, 15]], 4: [[13, 15], [15, 17]]}
+    public HashMap<Integer, ArrayList<int[]>> buildClassPerDayMap() {
+        HashMap<Integer, ArrayList<int[]>> scheduleTimeAndDayMap = new HashMap<Integer, ArrayList<int[]>>();
+        int dayInd;
+        ArrayList<int[]> scheduleDayVal;
+        for (Course course: courses) {
+                for (Map.Entry<Integer, int[]> day: course.getSessionDayTimeMap().entrySet()) {
+                        dayInd = day.getKey();
+                        scheduleDayVal = scheduleTimeAndDayMap.get(dayInd);
+                        scheduleDayVal.add(day.getValue());
+                        scheduleTimeAndDayMap.put(dayInd, scheduleDayVal);
+                }
+        }
+        return scheduleTimeAndDayMap;
+    }
+
     public ArrayList<Course> getCourses() {
         return courses;
     }
 
-    public HashMap<String, String> getClassTimes() {
+    public HashMap<Integer, ArrayList<int[]>> getClassTimes() {
         return classTimes;
     }
 
