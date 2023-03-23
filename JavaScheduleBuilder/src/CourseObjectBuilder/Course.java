@@ -4,17 +4,19 @@ public class Course extends LearningSession{
     private Boolean isFull;
     private String courseNumber;
     private String courseTitle;
+    private String sectionNumber;
     private int creditHours;
     private String instructor;
     private Boolean hasLab;
     private Lab lab;
 
     //Course constructor for a class without a lab
-    public Course(Boolean isFull, String courseNumber, String courseTitle, int creditHours, String classTime, String classDays, String instructor) {
+    public Course(Boolean isFull, String courseNumber, String courseTitle, String sectionNumber, int creditHours, String classTime, String classDays, String instructor) {
         super(classTime, classDays);
         isFull = this.isFull;
         courseNumber = this.courseNumber;
         courseTitle = this.courseTitle;
+        sectionNumber = this.sectionNumber;
         creditHours = this.creditHours;
         instructor = this.instructor;
         hasLab = false;
