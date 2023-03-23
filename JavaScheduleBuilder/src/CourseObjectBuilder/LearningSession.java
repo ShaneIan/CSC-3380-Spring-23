@@ -20,6 +20,9 @@ public abstract class LearningSession {
         sessionDayTimeMap = makeDayTimeMap(sessionDayIndices, timeStartIndex, timeEndIndex);
     }
 
+    //Take time string and convert it into a start time and end time index between 0 and 30 to be placed into
+    //the schedule matrix with the starting and ending time indexes
+    //Ex. String "0100-0220" would be converted to the index array [13, 15]
     private int[] convertTimeSlotStringToIndices(String timeString) {
         Pattern p = Pattern.compile("(\\d+)-(\\d+)");
         Matcher match = p.matcher(timeString);
@@ -48,6 +51,8 @@ public abstract class LearningSession {
     }
 
     //Converts Time int to index between 0 and 30
+    //Uses a boolean to differentiate night classes from other classes for proper indexing
+    //Ex. convertTimeIntToIndex(700, true) would return 24
     private int convertTimeIntToIndex(int timeInt, Boolean isNight) {
         if (timeInt < 700 || isNight) {
             int timeInd = timeInt / 50 + 10;
@@ -59,6 +64,10 @@ public abstract class LearningSession {
         }
     }
 
+    //Converts a day string into each individual day string
+    //and converts each day string into an index to be placed into the schedule matrix
+    //Ex. The string "M W F" would be converted into the string "M", "W", "F",
+    //which would then be converted into the array [0, 2, 4]
     private int[] convertDayStringToIndices(String dayString) {
         String[] days = dayString.split("\\s");
         int[] dayIndices = new int[days.length];
@@ -90,6 +99,12 @@ public abstract class LearningSession {
         return dayIndices;
     }
 
+    //Produces a HashMap of the key,value pair form 'dayIndex:[startTimeIndex, endTimeIndex]'
+    //which can be iterated through the check if learningSession subclass times conflict and 
+    //to add a learningSession subclass time to a schedule matrix
+    //Ex. A learning session with class "M W F" at "0100-0220" with the classIndex array [0, 2, 4],
+    //startTimeIndex = 13 and endTimeIndex = 15 would be returned as the map
+    //TimeAndDayMap = {0: [13, 15], 2: [13, 15], 4: [13, 15]}
     public HashMap<Integer, int[]> makeDayTimeMap(int[] dayIndices, int startIndex, int endIndex) {
         HashMap<Integer, int[]> TimeAndDayMap = new HashMap<Integer, int[]>();
         int dayArrIndex = 0;
