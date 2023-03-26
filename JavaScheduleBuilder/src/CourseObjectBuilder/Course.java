@@ -1,36 +1,35 @@
 package CourseObjectBuilder;
-import java.util.*;
 
-public class Course {
+public class Course extends LearningSession{
     private Boolean isFull;
     private String courseNumber;
     private String courseTitle;
+    private String sectionNumber;
     private int creditHours;
-    private String classTime;
-    private String[] classDays;
     private String instructor;
     private Boolean hasLab;
     private Lab lab;
 
-    public Course(Boolean isFull, String courseNumber, String courseTitle, int creditHours, String classTime, String[] classDays, String instructor) {
+    //Course constructor for a class without a lab
+    public Course(Boolean isFull, String courseNumber, String courseTitle, String sectionNumber, int creditHours, String classTime, String classDays, String instructor) {
+        super(classTime, classDays);
         isFull = this.isFull;
         courseNumber = this.courseNumber;
         courseTitle = this.courseTitle;
+        sectionNumber = this.sectionNumber;
         creditHours = this.creditHours;
-        classTime = this.classTime;
-        classDays = this.classDays;
         instructor = this.instructor;
         hasLab = false;
         lab = null;
     }
 
-    public Course(Boolean isFull, String courseNumber, String courseTitle, int creditHours, String classTime, String[] classDays, String instructor, Lab lab) {
+    //Course constructor for a class with a lab
+    public Course(Boolean isFull, String courseNumber, String courseTitle, int creditHours, String classTime, String classDays, String instructor, Lab lab) {
+        super(classTime, classDays);
         isFull = this.isFull;
         courseNumber = this.courseNumber;
         courseTitle = this.courseTitle;
         creditHours = this.creditHours;
-        classTime = this.classTime;
-        classDays = this.classDays;
         instructor = this.instructor;
         hasLab= true;
         lab = this.lab;
@@ -52,14 +51,6 @@ public class Course {
         return creditHours;
     }
 
-    public String getClassTime() {
-        return classTime;
-    }
-
-    public String[] getClassDays() {
-        return classDays;
-    }
-
     public Boolean isLabCourse() {
         return hasLab;
     }
@@ -67,28 +58,4 @@ public class Course {
     public Lab getLab() {
         return lab;
     }
-
-    //Returns a map with class day as a key and class time as the value
-    //Accounts for lab days and times as part of the same map
-    //Ex: classTimeAndDayMap = {'M':'1:30-2:30', 'W':'1:30-2:30', 'F':'1:30-2:30', 'T':'1:30-4:30'}
-    public HashMap<String, String> compileClassTimes() {
-        HashMap<String, String> classTimeAndDayMap = new HashMap<String, String>();
-        String[] daysArr;
-        String timeStr;
-        daysArr = this.classDays;
-        timeStr = this.classTime;
-        for (String day: daysArr) {
-            classTimeAndDayMap.put(day, timeStr);
-        }
-        if (this.isLabCourse()) {
-            Lab lab = this.getLab();
-            String[] labDays = lab.getLabDays();
-            String labTime = lab.getLabTimes();
-            for (String day: labDays) {
-                classTimeAndDayMap.put(day, labTime);
-            }
-        }
-        return classTimeAndDayMap;
-    }
-
 }
