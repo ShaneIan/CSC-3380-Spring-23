@@ -10,7 +10,7 @@ public class RequestManager implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         String requestMethod = exchange.getRequestMethod();
-        File file = new File("CSC-3380-Spring-23/JavaScheduleBuilder/src/ClientManager/index.html");
+        File file = new File("./JavaScheduleBuilder/src/ClientManager/index.html");
         byte[] bytes = Files.readAllBytes(file.toPath());
 
         exchange.getResponseHeaders().set("Content-Type", "text/html");
