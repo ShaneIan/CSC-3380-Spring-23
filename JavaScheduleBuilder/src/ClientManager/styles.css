@@ -6,3 +6,10 @@ header {
 body {
     background-color: rgb(48, 20, 86);
 }
+h1 {
+    color: white;
+}
+img {
+    object-position: left;
+    width: 250px;
+}
