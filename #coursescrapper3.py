@@ -29,24 +29,22 @@ def scrape_data_from_site(url, session):
         lines = data.text.split('\n')
         class_pattern = re.compile(r'^(\d+|\(F\))')
         for line in lines:
-            if class_pattern.match(line):
-                parts = line.split()
-                section_type = re.findall(r'\((.*?)\)', parts[4])
+            if "*" not in line and "AVL" not in line[0:3] and "   " not in line[0:3] and "-" not in line[0:3]:
                 class_info = {
-                    'avl_cnt': parts[0] or '',
-                    'enrl_cnt': parts[1] or '',
-                    'abbr': parts[2] or '',
-                    'num': parts[3] or '',
-                    'type': section_type[1] if len(section_type) > 1 else '',
-                    'section': section_type[0] if len(section_type) > 0 else '',
-                    'course_title': ' '.join(parts[5:-6]) or '',
-                    'credits': parts[-6] or '',
-                    'time': parts[-5] or '',
-                    'days': parts[-4] or '',
-                    'room': parts[-3] or '',
-                    'building': parts[-2] or '',
-                    'special_section': parts[-1] or '',
-                    'instructor': ' '.join(parts[-4:-1]) or ''
+                    'avl_cnt': line[0:3],
+                    'enrl_cnt': line[4:9],
+                    'abbr': line[10:15],
+                    'num': line[16:20],
+                    'type': line[20:25],
+                    'section': line[27:31],
+                    'course_title': line[32:55],
+                    'credits': line[55:59],
+                    'time': line[59:70],
+                    'days': line[71:79],
+                    'room': line[79:84],
+                    'building': line[84:100],
+                    'special_section': line[100:113],
+                    'instructor': line[113:]
                 }
                 list_of_classes.append(class_info)
                 print(class_info)  #print class line into console
@@ -58,6 +56,7 @@ def scrape_data_from_site(url, session):
 def create_database():
     conn = sqlite3.connect('courses.db')
     c = conn.cursor()
+    c.execute('DELETE FROM courses')
     c.execute('''CREATE TABLE IF NOT EXISTS courses (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     avl_cnt TEXT,
@@ -108,8 +107,8 @@ def main():
 
     department_links_global = []
     with requests.Session() as session:
-        department_links_global += make_list_of_links(spring_2023, session)
-        department_links_global += make_list_of_links(summer_2023, session)
+        #department_links_global += make_list_of_links(spring_2023, session)
+        #department_links_global += make_list_of_links(summer_2023, session)
         department_links_global += make_list_of_links(fall_2023, session)
 
         list_of_classes = []
