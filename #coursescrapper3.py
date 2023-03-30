@@ -29,25 +29,25 @@ def scrape_data_from_site(url, session):
         lines = data.text.split('\n')
         class_pattern = re.compile(r'^(\d+|\(F\))')
         for line in lines:
-            if "*" not in line and "AVL" not in line[0:3] and "   " not in line[0:3] and "-" not in line[0:3]:
+            if "*" not in line and "AVL" not in line[0:3] and "   " not in line[0:3] and "-" not in line[0:3] and line[0:3] != "":
                 class_info = {
-                    'avl_cnt': line[0:3],
-                    'enrl_cnt': line[4:9],
-                    'abbr': line[10:15],
-                    'num': line[16:20],
-                    'type': line[20:25],
-                    'section': line[27:31],
-                    'course_title': line[32:55],
-                    'credits': line[55:59],
-                    'time': line[59:70],
-                    'days': line[71:79],
-                    'room': line[79:84],
-                    'building': line[84:100],
-                    'special_section': line[100:113],
-                    'instructor': line[113:]
+                    'avl_cnt': line[0:3].strip(),
+                    'enrl_cnt': line[4:9].strip(),
+                    'abbr': line[10:15].strip(),
+                    'num': line[16:20].strip(),
+                    'type': line[20:25].strip(),
+                    'section': line[27:31].strip(),
+                    'course_title': line[32:55].strip(),
+                    'credits': line[55:59].strip(),
+                    'time': line[59:70].strip(),
+                    'days': line[71:79].strip(),
+                    'room': line[79:84].strip(),
+                    'building': line[84:100].strip(),
+                    'special_section': line[100:113].strip(),
+                    'instructor': line[113:].strip()
                 }
                 list_of_classes.append(class_info)
-                print(class_info)  #print class line into console
+                #print(class_info)  #print class line into console
     return list_of_classes
 
 
@@ -56,7 +56,8 @@ def scrape_data_from_site(url, session):
 def create_database():
     conn = sqlite3.connect('courses.db')
     c = conn.cursor()
-    c.execute('DELETE FROM courses')
+    if doesTableExist("courses", c):
+        c.execute('DELETE FROM courses ')
     c.execute('''CREATE TABLE IF NOT EXISTS courses (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     avl_cnt TEXT,
@@ -99,6 +100,16 @@ def insert_classes_into_database(classes):
                         course['instructor']))
     conn.commit()
     conn.close()    
+
+def doesTableExist(table_name, cursor):
+    cursor.execute("""SELECT name FROM sqlite_master WHERE type='table';""")
+    myresult = cursor.fetchall()
+    for tableName in myresult:
+        print('table name', tableName[0])
+        if tableName[0] == table_name:
+            return True
+    return False
+
     
 def main():
     spring_2023 = "http://appl101.lsu.edu/booklet2.nsf/bed33d8925ab561b8625651700585b85?OpenView&Start=1&Count=100000&Expand=59#59"
