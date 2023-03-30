@@ -5,19 +5,23 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script>
+        var fieldCount = 2;
+
         function addField() {
-          var container = document.getElementById("field-container");
-          var newField = document.createElement("div");
-          newField.innerHTML = '<input type="text" name="field[]" />';
-          container.appendChild(newField);
+            var container = document.getElementById("field-container");
+            var newField = document.createElement("div");
+            newField.innerHTML = '<input type="text" name="field' + fieldCount + '" />';
+            container.appendChild(newField);
+            fieldCount++;
         }
-    
+
         function removeField() {
-          var container = document.getElementById("field-container");
-          var fields = container.getElementsByTagName("div");
-          if (fields.length > 1) {
-            container.removeChild(fields[fields.length - 1]);
-          }
+            var container = document.getElementById("field-container");
+            var fields = container.getElementsByTagName("div");
+            if (fields.length > 1) {
+                container.removeChild(fields[fields.length - 1]);
+                fieldCount--;
+            }
         }
       </script>
 </head>
@@ -31,9 +35,12 @@
     <div class="TitleHeader">
         <h1>LSU Automatic Scheduler</h1>
     </div class="ClassSearch">
+    <div>
+        <p>Enter class code as listed<br>Ex. "CSC 3380"</p>
+    </div>
     <form method="POST" action="/submit">
         <div id="field-container">
-          <div><input type="text" name="field[]" /></div>
+          <div><input type="text" name="field1"/></div>
         </div>
         <button type="button" onclick="addField()">Add Field</button>
         <button type="button" onclick="removeField()">Remove Field</button>

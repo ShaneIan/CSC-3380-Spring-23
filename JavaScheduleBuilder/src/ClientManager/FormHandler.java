@@ -22,9 +22,15 @@ public class FormHandler implements HttpHandler{
             
             // handle the form data
             // ...
+            String response = "";
+            ArrayList<String> coursesSearched = new ArrayList<>();
+            for (Map.Entry<String, String> entry : formData.entrySet()) {
+                response += entry.getValue() + "\n";
+                coursesSearched.add(entry.getValue());
+                System.out.println(entry.getKey() + ": " + entry.getValue());
+            }
             
             // send the response
-            String response = "Form submitted successfully";
             exchange.sendResponseHeaders(200, response.length());
             OutputStream output = exchange.getResponseBody();
             output.write(response.getBytes());
@@ -36,8 +42,10 @@ public class FormHandler implements HttpHandler{
     private Map<String, String> parseFormData(String request) {
         Map<String, String> formData = new HashMap<>();
         String[] pairs = request.split("&");
+        System.out.println(Arrays.toString(pairs));
         for (String pair : pairs) {
             String[] parts = pair.split("=");
+            System.out.println(Arrays.toString(parts));
             if (parts.length == 2) {
                 String key = parts[0];
                 String value = parts[1];
@@ -48,6 +56,9 @@ public class FormHandler implements HttpHandler{
                     // ignore
                 }
                 formData.put(key, value);
+                for (Map.Entry<String, String> entry : formData.entrySet()) {
+                    System.out.println(entry.getKey() + ": " + entry.getValue());
+                }
             }
         }
         return formData;
