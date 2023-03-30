@@ -1,7 +1,5 @@
 package CourseDataManager;
 
-
-
 public class DataManager {
     
     //client sends lists of demands for scheudler
@@ -13,7 +11,7 @@ public class DataManager {
     public void querySQLServer(){
 
     }
-    //take sql querrys to fill out hashmap 
+    //take sql querries to fill out hashmap 
     //for any given students schedule request
     public void buildCourseObjFromQuery(){
 

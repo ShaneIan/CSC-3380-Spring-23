@@ -60,7 +60,7 @@ public class DatabaseOperations {
         try {
             connection = DBConnection.getConnection();
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT * FROM courses WHERE abbr=" + abbreviation + " AND num=" + courseNumber);
+            resultSet = statement.executeQuery("SELECT * FROM courses WHERE courses.abbr='" + abbreviation + "' AND courses.num='" + courseNumber + "'");
             int columnCount = resultSet.getMetaData().getColumnCount();
 
             while (resultSet.next()) {

@@ -48,8 +48,7 @@ public class ScheduleTimeAnalyzer implements ScheduleAnalyzer{
         morninghours/totalhours = percentmorning
         percentmorning * 100
         return percentmorning
-        return ranking points
-
-    }
-*/ 
+        return ranking points*/
+        return 0;
+    } 
 }
