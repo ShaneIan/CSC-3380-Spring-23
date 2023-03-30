@@ -4,6 +4,22 @@
     <title>Automatic Scheduler Builder</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <script>
+        function addField() {
+          var container = document.getElementById("field-container");
+          var newField = document.createElement("div");
+          newField.innerHTML = '<input type="text" name="field[]" />';
+          container.appendChild(newField);
+        }
+    
+        function removeField() {
+          var container = document.getElementById("field-container");
+          var fields = container.getElementsByTagName("div");
+          if (fields.length > 1) {
+            container.removeChild(fields[fields.length - 1]);
+          }
+        }
+      </script>
 </head>
 
 <body>
@@ -15,34 +31,16 @@
     <div class="TitleHeader">
         <h1>LSU Automatic Scheduler</h1>
     </div class="ClassSearch">
-    <div>
-        <button onclick="add()">Add</button>
-        <button onclick="remove()">Remove</button>
-    </div>
-    <input type="text">
-    <div id="new_chq"></div>
-        <form>
-            <input type="hidden" value="1" id="total_chq">
-            <script language="JavaScript" type="text/javascript">
-                function add(){
-                    var new_chq_no = parseInt($('#total_chq').val())+1;
-                    var new_input="<input type='text' id='new_"+new_chq_no+"'>";
-                    $('#new_chq').append(new_input);
-                    $('#total_chq').val(new_chq_no)
-                    }
-                function remove(){
-                    var last_chq_no = $('#total_chq').val();
-                    if(last_chq_no>1){
-                        $('#new_'+last_chq_no).remove();
-                        $('#total_chq').val(last_chq_no-1);
-                    }
-                }
-            </script>
-        </form>
-    </div>
-    <div id="searchButton">
-        <button>Search</button>
-    </div>
+    <form method="POST" action="/submit">
+        <div id="field-container">
+          <div><input type="text" name="field[]" /></div>
+        </div>
+        <button type="button" onclick="addField()">Add Field</button>
+        <button type="button" onclick="removeField()">Remove Field</button>
+        <div id="searchButon">
+            <button type="submit">Search</button>
+        </div>
+      </form>
 </body>
 
 </html>

@@ -12,12 +12,12 @@ public class ScheduleServer {
       HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
 
       server.createContext("/", new StaticFileServer());
+      server.createContext("/submit", new FormHandler());
 
       server.start();
 
       System.out.println("Server started on port 8000");
-      DatabaseOperations dbOper = new DatabaseOperations();
-      String[] dbResponse = dbOper.fetchDataByCourseCode("ACCT", "2000");
-      System.out.print(Arrays.toString(dbResponse));
+      //DatabaseOperations dbOper = new DatabaseOperations();
+      //String[] dbResponse = dbOper.fetchDataByCourseCode("BE", "1251");
   }
 }
