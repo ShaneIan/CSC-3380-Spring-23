@@ -27,6 +27,11 @@ public abstract class LearningSession {
         String[] timeArr = timeString.split("-");
         int startTime = Integer.parseInt(timeArr[0].trim());
         int endTime = Integer.parseInt(timeArr[1].replace("N", ""));
+        //Logic to convert start time at a half hour from x:30 to x50
+        //Ex. Class starting at 4:30 would be from 430 to 450
+        if (startTime % 100 != 0) {
+            startTime += 20;
+        }
         //Logic to convert endTime to nearest half hour
         //Divide by 50 to get times ending in x:50 to next hour
         //Since integers are used, 50 must be added to get time int to nearest hundred
