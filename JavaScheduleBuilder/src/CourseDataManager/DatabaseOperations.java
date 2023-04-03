@@ -1,10 +1,8 @@
 package CourseDataManager;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class DatabaseOperations {
     
@@ -51,8 +49,8 @@ public class DatabaseOperations {
 
     //Builds a course query from given abbreviation and courseNumber and returns all sections of that course
     //Ex. fetchDataByCourseCode("ACCT", "1001") would returns all sections of ACCT 1001
-    public String[] fetchDataByCourseCode(String abbreviation, String courseNumber) {
-        List<String> dataList = new ArrayList<>();
+    public String[][] fetchDataByCourseCode(String abbreviation, String courseNumber) {
+        ArrayList<String[]> dataList = new ArrayList<>();
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -62,7 +60,6 @@ public class DatabaseOperations {
             statement = connection.createStatement();
             resultSet = statement.executeQuery("SELECT * FROM courses WHERE courses.abbr='" + abbreviation + "' AND courses.num='" + courseNumber + "'");
             int columnCount = resultSet.getMetaData().getColumnCount();
-
             while (resultSet.next()) {
                 StringBuilder row = new StringBuilder();
                 for (int i = 1; i <= columnCount; i++) {
@@ -71,7 +68,9 @@ public class DatabaseOperations {
                         row.append(", ");
                     }
                 }
-                dataList.add(row.toString());
+                String[] courseInfo = row.toString().split(",");
+                System.out.println(Arrays.toString(courseInfo));
+                dataList.add(courseInfo);
             }
 
         } catch (Exception e) {
@@ -85,8 +84,14 @@ public class DatabaseOperations {
                 System.err.println("Error closing database resources: " + e.getMessage());
             }
         }
-
-        return dataList.toArray(new String[0]);
+        String[][] finalCourseList = new String[dataList.size()][];
+        for (int i = 0; i < dataList.size(); i++) {
+            String[] courseEntry = dataList.get(i);
+            finalCourseList[i] = courseEntry;
+        }
+        return finalCourseList;
     }
+
+    
 }
 

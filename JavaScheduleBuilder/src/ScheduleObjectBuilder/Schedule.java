@@ -21,13 +21,18 @@ public class Schedule {
         scheduleMatrix = BuildScheduleMatrix();
     }
 
+    //Copy contructor for recursive schedule builder method
+    public Schedule(Schedule prevScheduleObj) {
+        courses = prevScheduleObj.getCourses();
+        totalHours = prevScheduleObj.getTotalCreditHours();
+        scheduleMatrix = prevScheduleObj.getScheduleMatrix();
+    }
+
     public String[][] BuildScheduleMatrix() {
-        String[][] scheduleArray = new String[5][31];
+        String[][] scheduleArray = new String[6][31];
         for (String[] Day: scheduleArray)
         {
-                for (String TimeSlot: Day){
-                        TimeSlot = "-";
-                }
+                Arrays.fill(Day, "-");
                         
         }
         return scheduleArray;
@@ -123,6 +128,15 @@ public class Schedule {
         return scheduleTimeAndDayMap;
     }
 
+    public boolean containsCourse(String courseCode) {
+        for (Course course: courses) {
+                if (course.getCourseNumber().equals(courseCode)) {
+                        return true;
+                }
+        }
+        return false;
+    }
+
     public ArrayList<Course> getCourses() {
         return courses;
     }
@@ -133,5 +147,9 @@ public class Schedule {
 
     public int getTotalCreditHours() {
         return totalHours;
+    }
+
+    public String[][] getScheduleMatrix() {
+        return scheduleMatrix;
     }
 }

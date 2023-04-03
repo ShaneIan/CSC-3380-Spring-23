@@ -1,28 +1,75 @@
 package CourseDataManager;
+import ScheduleObjectBuilder.*;
+import CourseObjectBuilder.*;
+
+import java.util.*;
 
 public class DataManager {
+    private ArrayList<String> courseSearch;
+    private Course[][] coursesQueried;
+    private DatabaseOperations dbOpr;
+    private ScheduleBuilder scheduleBldr;
+    private ArrayList<Schedule> viableSchedules;
     
-    //client sends lists of demands for scheudler
-    //create a sql query from those and return data
-    public void buildQueryFromSearch(){
+    public DataManager(ArrayList<String> searchedCourses) {
+        courseSearch = searchedCourses;
+        dbOpr = new DatabaseOperations();
+        coursesQueried = queryCoursesFromSearch(searchedCourses);
+        scheduleBldr = new ScheduleBuilder(coursesQueried);
+        viableSchedules = scheduleBldr.returnViableSchedules();
+        scheduleBldr.returnViableScheduleMatrices();
+    }
 
+    //Take ArrayList<String> from html form, convert each string from
+    //format "ABBR #### to ["ABBR", "####"] to pass to dbOpr to fetch
+    //all courses with matching course codes
+    public Course[][] queryCoursesFromSearch(ArrayList<String> search) {
+        if (search == null) {
+            System.out.println("Search was null");
+            return null;
+        }
+        ArrayList<Course[]> coursesReturned = new ArrayList<>();
+        for (String searchItem: search) {
+            String[] courseCode = searchItem.split(" ");
+            if (courseCode.length == 2) {
+                ArrayList<Course> sectionsReturned = new ArrayList<>();
+                String[][] queryData = dbOpr.fetchDataByCourseCode(courseCode[0], courseCode[1]);
+                for (String[] courseListing: queryData) {
+                    sectionsReturned.add(convertQueryArrayToCourse(courseListing));
+                }
+                coursesReturned.add(sectionsReturned.toArray(new Course[0]));
+            }
+        }
+        Course[][] finalCourseSectionsList = new Course[coursesReturned.size()][];
+        for (int i = 0; i < coursesReturned.size(); i++) {
+            Course[] courseSections = coursesReturned.get(i);
+            finalCourseSectionsList[i] = courseSections;
+        }
+        return finalCourseSectionsList;
     }
     //creates the SQL query
-    public void querySQLServer(){
-
-    }
-    //take sql querries to fill out hashmap 
-    //for any given students schedule request
-    public void buildCourseObjFromQuery(){
-
-    }
-    //given user query creates a matching set of schedules
-    //that fit some given set of query characteristics
-    public void compileSchedulesFromQuery(){
-
+    public Course convertQueryArrayToCourse(String[] queryArray) {
+        boolean isFull = false;
+        if (queryArray[1]=="(F)") {
+            isFull = true;
+        }
+        String courseCode = queryArray[3] + " " + queryArray[4];
+        int creditHours = (int) Float.parseFloat(queryArray[8]);
+        Course convertedCourse = new Course(isFull, courseCode, queryArray[7], queryArray[6], creditHours, queryArray[9], queryArray[10], queryArray[14]);
+        return convertedCourse;
     }
 
-    public void getTopRankedSchedules() {
-
+    public Course[][] getCoursesQueried() {
+        Course[][] coursesQueriedCopy = coursesQueried.clone();
+        return coursesQueriedCopy;
     }
+
+    public ArrayList<String[][]> getViableScheduleMatrices() {
+        ArrayList<String[][]> viableScheduleMatrices = new ArrayList<>();
+                for (Schedule schedule: viableSchedules) {
+                        viableScheduleMatrices.add(schedule.getScheduleMatrix());
+                }
+                return viableScheduleMatrices;
+    }
+
 }

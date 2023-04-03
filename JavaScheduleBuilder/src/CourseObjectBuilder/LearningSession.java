@@ -6,16 +6,16 @@ public abstract class LearningSession {
     private String sessionTime;
     private int timeStartIndex;
     private int timeEndIndex;
-    private String sessionDays;
+    public String sessionDays;
     private int[] sessionDayIndices;
     private HashMap<Integer, int[]> sessionDayTimeMap;
 
-    public LearningSession(String sessionTime, String sessionDays) {
-        sessionTime = this.sessionTime;
-        int[] timeIndices = convertTimeSlotStringToIndices(this.sessionTime);
+    public LearningSession(String sessionTimes, String sessionWeekDays) {
+        sessionTime = sessionTimes;
+        int[] timeIndices = convertTimeSlotStringToIndices(sessionTimes);
         timeStartIndex = timeIndices[0];
         timeEndIndex = timeIndices[1];
-        sessionDays = this.sessionDays;
+        sessionDays = sessionWeekDays;
         sessionDayIndices = convertDayStringToIndices(this.sessionDays);
         sessionDayTimeMap = makeDayTimeMap(sessionDayIndices, timeStartIndex, timeEndIndex);
     }
@@ -24,11 +24,9 @@ public abstract class LearningSession {
     //the schedule matrix with the starting and ending time indexes
     //Ex. String "0100-0220" would be converted to the index array [13, 15]
     private int[] convertTimeSlotStringToIndices(String timeString) {
-        Pattern p = Pattern.compile("(\\d+)-(\\d+)");
-        Matcher match = p.matcher(timeString);
-        int startTime = Integer.parseInt(match.group(1));
-        int endTime = Integer.parseInt(match.group(2));
-
+        String[] timeArr = timeString.split("-");
+        int startTime = Integer.parseInt(timeArr[0].trim());
+        int endTime = Integer.parseInt(timeArr[1].replace("N", ""));
         //Logic to convert endTime to nearest half hour
         //Divide by 50 to get times ending in x:50 to next hour
         //Since integers are used, 50 must be added to get time int to nearest hundred
@@ -69,7 +67,7 @@ public abstract class LearningSession {
     //Ex. The string "M W F" would be converted into the string "M", "W", "F",
     //which would then be converted into the array [0, 2, 4]
     private int[] convertDayStringToIndices(String dayString) {
-        String[] days = dayString.split("\\s");
+        String[] days = dayString.trim().split(" ");
         int[] dayIndices = new int[days.length];
         int dayInd = 0;
         for (String day: days) {
@@ -82,7 +80,7 @@ public abstract class LearningSession {
             else if (day.equals("W")) {
                 dayIndices[dayInd] = 2;
             }
-            else if (day.equals("Th")) {
+            else if (day.equals("TH")) {
                 dayIndices[dayInd] = 3;
             }
             else if (day.equals("F")) {
@@ -111,6 +109,7 @@ public abstract class LearningSession {
         while (dayArrIndex < dayIndices.length) 
         {
             TimeAndDayMap.put(dayIndices[dayArrIndex], new int[] {startIndex, endIndex});
+            dayArrIndex++;
         }
         return TimeAndDayMap;
     }
