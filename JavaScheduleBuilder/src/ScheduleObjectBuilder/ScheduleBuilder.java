@@ -25,23 +25,27 @@ public class ScheduleBuilder {
         public void buildSchedule(Schedule newSchedule, int course, int section) {
                 System.out.println("Course: " + course + " Section: " + section);
                 if (newSchedule.checkClassTimesConflict(allCourseAndSections[course][section])) {
-                        newSchedule.AddClass(allCourseAndSections[course][section]);
-                        System.out.println(Arrays.deepToString(newSchedule.getScheduleMatrix()));
+                        if (!newSchedule.containsCourse(allCourseAndSections[course][section].getCourseNumber())) {
+                                newSchedule.AddClass(allCourseAndSections[course][section]);
+                                System.out.println(Arrays.deepToString(newSchedule.getScheduleMatrix()));
+                        }
                         if (course == allCourseAndSections.length - 1) {
                                 if (newSchedule.getCourses().size() == allCourseAndSections.length) {
                                         viableSchedules.add(newSchedule);
                                         System.out.println("Added schedule");  
                                 }
                         }
-                
+
                         if (course < allCourseAndSections.length - 1) {
                                 buildSchedule(new Schedule(newSchedule), course + 1, 0);
                         }
-                
-                        if (section < allCourseAndSections[course].length - 1 && !newSchedule.containsCourse(allCourseAndSections[course][section].getCourseNumber())) {
+
+                        if (section < allCourseAndSections[course].length - 1) {
                                 buildSchedule(new Schedule(newSchedule), course, section + 1);
                         }
+                
                 }
+                return;
         }
 
         public ArrayList<Schedule> returnViableSchedules() {
