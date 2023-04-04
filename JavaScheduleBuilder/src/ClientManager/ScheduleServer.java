@@ -17,7 +17,5 @@ public class ScheduleServer {
       server.start();
 
       System.out.println("Server started on port 8000");
-      //DatabaseOperations dbOper = new DatabaseOperations();
-      //String[] dbResponse = dbOper.fetchDataByCourseCode("BE", "1251");
   }
 }

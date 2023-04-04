@@ -28,7 +28,7 @@ public class Schedule {
         scheduleMatrix = prevScheduleObj.getScheduleMatrix();
     }
 
-    public String[][] BuildScheduleMatrix() {
+    private String[][] BuildScheduleMatrix() {
         String[][] scheduleArray = new String[6][31];
         for (String[] Day: scheduleArray)
         {
@@ -139,6 +139,14 @@ public class Schedule {
 
     public ArrayList<Course> getCourses() {
         return courses;
+    }
+
+    public ArrayList<String> getCoursesTitleAndSection() {
+        ArrayList<String> courseSectArr = new ArrayList<>();
+        for (Course course: courses) {
+            courseSectArr.add(course.getCourseTitle() + " Section " + course.getSectionNumber());
+        }
+        return courseSectArr;
     }
 
     public HashMap<Integer, ArrayList<int[]>> getClassTimes() {

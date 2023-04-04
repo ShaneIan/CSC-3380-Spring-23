@@ -49,6 +49,9 @@ public class DataManager {
     }
     //creates the SQL query
     public Course convertQueryArrayToCourse(String[] queryArray) {
+        if (queryArray[13].contains("WEB B")) {
+            return null;
+        }
         boolean isFull = false;
         if (queryArray[1]=="(F)") {
             isFull = true;
@@ -64,12 +67,8 @@ public class DataManager {
         return coursesQueriedCopy;
     }
 
-    public ArrayList<String[][]> getViableScheduleMatrices() {
-        ArrayList<String[][]> viableScheduleMatrices = new ArrayList<>();
-                for (Schedule schedule: viableSchedules) {
-                        viableScheduleMatrices.add(schedule.getScheduleMatrix());
-                }
-                return viableScheduleMatrices;
+    public ArrayList<Schedule> getViableSchedules() {
+        return viableSchedules;
     }
 
 }

@@ -1,5 +1,7 @@
 package ClientManager;
 import CourseDataManager.*;
+import ScheduleObjectBuilder.Schedule;
+
 import java.io.*;
 import java.util.*;
 import java.net.*;
@@ -26,19 +28,21 @@ public class FormHandler implements HttpHandler{
             String response = "";
             ArrayList<String> coursesSearched = new ArrayList<>();
             for (Map.Entry<String, String> entry : formData.entrySet()) {
-                response += entry.getValue() + "\n";
+                //response += entry.getValue() + "\n";
                 coursesSearched.add(entry.getValue());
             }
             System.out.println("\n");
             DataManager DataMngr= new DataManager(coursesSearched);
-            ArrayList<String[][]> viableScheduleMatrices = DataMngr.getViableScheduleMatrices();
-            for (String[][] schedMatrix: viableScheduleMatrices) {
-                for (String[] day: schedMatrix) {
-                    response += Arrays.toString(day);
-                    response += "\n";
-                }
+            ArrayList<Schedule> viableSchedules = DataMngr.getViableSchedules();
+            for (Schedule schedule: viableSchedules) {
+                //response += "Schedule Option: \n";
+                //for (String[] day: schedMatrix) {
+                    //response += Arrays.toString(day);
+                    //response += "\n";
+                //}
+                response += new ScheduleTableBuilder(schedule).returnTableString();
             }
-            if (viableScheduleMatrices.size() == 0) {
+            if (viableSchedules.size() == 0) {
                 response += "There were no schedules that fit the courses searched. Try a different search. \n";
             }
             // send the response
