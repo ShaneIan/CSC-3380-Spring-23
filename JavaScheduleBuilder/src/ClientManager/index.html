@@ -26,24 +26,24 @@
       </script>
 </head>
 
-<body>
-    <header id="header" class="navbar navbar-expand-lg navbar-dark fixed-top">
+<body style="background-color: rgb(48, 20, 86);">
+    <header id="header" style="background-color: rgb(48, 20, 86);">
         <div class="logo">
-            <img src="https://www.lsu.edu/_resources_fierce/svgs/lsu-logo.svg" class="menu_logo" alt="Louisiana State University"></a>
+            <img src="https://www.lsu.edu/_resources_fierce/svgs/lsu-logo.svg" class="menu_logo" alt="Louisiana State University" style="object-position: left;width: 250px;"></a>
         </div>
     </header>
     <div class="TitleHeader">
-        <h1>LSU Automatic Scheduler</h1>
+        <h1 style="color: white;">LSU Automatic Scheduler</h1>
     </div class="ClassSearch">
     <div>
-        <p>Enter class code as listed<br>Ex. "CSC 3380"</p>
+        <p style="color: white;">Enter class code as listed<br>Ex. "CSC 3380"</p>
     </div>
     <form method="POST" action="/submit">
         <div id="field-container">
           <div><input type="text" name="field1"/></div>
         </div>
-        <button type="button" onclick="addField()">Add Field</button>
-        <button type="button" onclick="removeField()">Remove Field</button>
+        <button type="button" onclick="addField()">Add Class</button>
+        <button type="button" onclick="removeField()">Remove Class</button>
         <div id="searchButon">
             <button type="submit">Search</button>
         </div>
