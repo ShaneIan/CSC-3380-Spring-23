@@ -51,7 +51,7 @@ public class Schedule {
                 day = entry.getKey();
                 startTime = entry.getValue()[0];
                 endTime = entry.getValue()[1];
-                for (int i = startTime; i <= endTime; i++) {
+                for (int i = startTime; i < endTime; i++) {
                         if (!scheduleMatrix[day][i].equals("-")) {
                                 return false;
                         }
@@ -63,7 +63,7 @@ public class Schedule {
                         day = entry.getKey();
                         startTime = entry.getValue()[0];
                         endTime = entry.getValue()[1];
-                        for (int i = startTime; i <= endTime; i++) {
+                        for (int i = startTime; i < endTime; i++) {
                                 if (!scheduleMatrix[day][i].equals("-")) {
                                         return false;
                                 }
@@ -84,7 +84,7 @@ public class Schedule {
                 day = entry.getKey();
                 startTime = entry.getValue()[0];
                 endTime = entry.getValue()[1];
-                for (int i = startTime; i <= endTime; i++) {
+                for (int i = startTime; i < endTime; i++) {
                         scheduleMatrix[day][i] = newClass.getCourseNumber();
                 }
         }
@@ -94,7 +94,7 @@ public class Schedule {
                         day = entry.getKey();
                         startTime = entry.getValue()[0];
                         endTime = entry.getValue()[1];
-                        for (int i = startTime; i <= endTime; i++) {
+                        for (int i = startTime; i < endTime; i++) {
                             scheduleMatrix[day][i] = newClass.getCourseNumber();
                         }
                 }
@@ -117,7 +117,7 @@ public class Schedule {
                 day = entry.getKey();
                 startTime = entry.getValue()[0];
                 endTime = entry.getValue()[1];
-                for (int i = startTime; i <= endTime; i++) {
+                for (int i = startTime; i < endTime; i++) {
                     if (scheduleMatrix[day][i] == remCourse.getCourseNumber())
                         scheduleMatrix[day][i] = "-";
                 }
@@ -128,7 +128,7 @@ public class Schedule {
                         day = entry.getKey();
                         startTime = entry.getValue()[0];
                         endTime = entry.getValue()[1];
-                        for (int i = startTime; i <= endTime; i++) {
+                        for (int i = startTime; i < endTime; i++) {
                             if (scheduleMatrix[day][i] == remCourse.getCourseNumber())
                                 scheduleMatrix[day][i] = "-";
                         }
@@ -177,14 +177,6 @@ public class Schedule {
         return courses;
     }
 
-    public ArrayList<String> getCoursesTitleAndSection() {
-        ArrayList<String> courseSectArr = new ArrayList<>();
-        for (Course course: courses) {
-            courseSectArr.add(course.getCourseTitle() + " Section " + course.getSectionNumber());
-        }
-        return courseSectArr;
-    }
-
     public HashMap<Integer, ArrayList<int[]>> getClassTimes() {
         return classTimes;
     }
@@ -195,5 +187,22 @@ public class Schedule {
 
     public String[][] getScheduleMatrix() {
         return scheduleMatrix;
+    }
+
+    public void getNumberHoursBeforeTwelve() {
+        HashMap<Integer, ArrayList<int[]>> times = getClassTimes();
+        Double hoursBefore12 = 0.0;
+        for (ArrayList<int[]> day: times.values()) {
+            for (int[] classTime: day) {
+                int startTime = classTime[0];
+                int endTime = classTime[1];
+                if (startTime > 10) {
+                    while (startTime < endTime) {
+                        hoursBefore12 += 0.5;
+                        startTime++;
+                    }
+                }
+            }
+        }
     }
 }
