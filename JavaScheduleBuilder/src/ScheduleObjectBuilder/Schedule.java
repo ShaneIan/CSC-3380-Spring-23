@@ -189,9 +189,9 @@ public class Schedule {
         return scheduleMatrix;
     }
 
-    public void getNumberHoursBeforeTwelve() {
+    public double getNumberHoursBeforeTwelve() {
         HashMap<Integer, ArrayList<int[]>> times = getClassTimes();
-        Double hoursBefore12 = 0.0;
+        double hoursBefore12 = 0.0;
         for (ArrayList<int[]> day: times.values()) {
             for (int[] classTime: day) {
                 int startTime = classTime[0];
