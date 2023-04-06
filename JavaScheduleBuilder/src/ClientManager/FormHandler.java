@@ -34,14 +34,8 @@ public class FormHandler implements HttpHandler{
             System.out.println("\n");
             DataManager DataMngr= new DataManager(coursesSearched);
             ArrayList<Schedule> viableSchedules = DataMngr.getViableSchedules();
-            for (Schedule schedule: viableSchedules) {
-                //response += "Schedule Option: \n";
-                //for (String[] day: schedMatrix) {
-                    //response += Arrays.toString(day);
-                    //response += "\n";
-                //}
-                response += new ScheduleTableBuilder(schedule).returnTableString();
-            }
+            response += new ScheduleTableBuilder(viableSchedules).returnTableString();
+            System.out.println("There are " + viableSchedules.size() + " viable schedules");
             if (viableSchedules.size() == 0) {
                 response += "There were no schedules that fit the courses searched. Try a different search. \n";
             }
