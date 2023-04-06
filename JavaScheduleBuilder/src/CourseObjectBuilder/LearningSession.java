@@ -1,6 +1,5 @@
 package CourseObjectBuilder;
 import java.util.*;
-import java.util.regex.*;
 
 public abstract class LearningSession {
     private String sessionTime;
@@ -49,7 +48,6 @@ public abstract class LearningSession {
         //Convert timeInt to index from 0 to 30
         startTime = convertTimeIntToIndex(startTime, timeString.contains("N"));
         endTime = convertTimeIntToIndex(endTime, timeString.contains("N"));
-
         return new int[] {startTime, endTime};
     }
 
@@ -57,12 +55,13 @@ public abstract class LearningSession {
     //Uses a boolean to differentiate night classes from other classes for proper indexing
     //Ex. convertTimeIntToIndex(700, true) would return 24
     private int convertTimeIntToIndex(int timeInt, Boolean isNight) {
+        int timeInd;
         if (timeInt < 700 || isNight) {
-            int timeInd = timeInt / 50 + 10;
+            timeInd = timeInt / 50 + 10;
             return timeInd;
         }
         else {
-            int timeInd = timeInt / 50 - 14;
+            timeInd = timeInt / 50 - 14;
             return timeInd;
         }
     }

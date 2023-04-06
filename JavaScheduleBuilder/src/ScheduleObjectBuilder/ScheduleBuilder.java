@@ -2,14 +2,13 @@ package ScheduleObjectBuilder;
 
 import java.util.*; 
 import CourseObjectBuilder.*;
-import ScheduleAnalyzer.*;
+//import ScheduleAnalyzer.*;
 
 public class ScheduleBuilder {
-        private HashMap<String, Course[]> sectionsPerCourse;
         private Course[][] allCourseAndSections;
         private ArrayList<Schedule> viableSchedules;
-        private ScheduleSpreadAnalyzer timeSpreadRanker;
-        private ScheduleTimeAnalyzer timeDensityRanker;
+        //private ScheduleSpreadAnalyzer timeSpreadRanker;
+        //private ScheduleTimeAnalyzer timeDensityRanker;
 
         public ScheduleBuilder(Course[][] courses) {
                 allCourseAndSections = courses;
@@ -23,23 +22,28 @@ public class ScheduleBuilder {
         }
 
         public void buildSchedule(Schedule newSchedule, int course, int section) {
-                System.out.println("Course: " + course + " Section: " + section);
                 if (newSchedule.checkClassTimesConflict(allCourseAndSections[course][section])) {
-                        System.out.println(Arrays.deepToString(newSchedule.getScheduleMatrix()));
+                        //System.out.println(Arrays.deepToString(newSchedule.getScheduleMatrix()));
                         //Check if schedule already contains the course being checked
                         //if it doesn't, add the class to the schedule
                         if (!newSchedule.containsCourse(allCourseAndSections[course][section].getCourseNumber())) {
-                                        newSchedule.AddClass(allCourseAndSections[course][section]);
+                                System.out.println("Adding Course: " + course + " Section: " + section);
+                                newSchedule.AddClass(allCourseAndSections[course][section]);
                         }
 
                         //If the last course in the 2D courses array has been reached, 
                         //and the schedule contains all classes searched, add schedule to viable schedules
-                        if (course == allCourseAndSections.length - 1) {
-                                if (newSchedule.getCourses().size() == allCourseAndSections.length) {
-                                        viableSchedules.add(newSchedule);
+                        if (newSchedule.getCourses().size() == allCourseAndSections.length) {
+                                //if (newSchedule.getCourses().size() == allCourseAndSections.length) {
+
+                                        viableSchedules.add(new Schedule(newSchedule));
                                         System.out.println("Added schedule"); 
                                         System.out.println(Arrays.deepToString(newSchedule.getScheduleMatrix())); 
-                                }
+                                        System.out.println("Current state of viable schedules:");
+                                        for (Schedule schedule: viableSchedules) {
+                                                System.out.println(Arrays.deepToString(schedule.getScheduleMatrix()));
+                                        }
+                                //}
                         }
 
                         //If there are still courses to add, call build schedule again with the course index increased by 1
@@ -50,9 +54,9 @@ public class ScheduleBuilder {
                         //If there are still sections to check for the given course, 
                         //call build schedule again with the section index increased by 1
                         if (section < allCourseAndSections[course].length - 1) {
-                                newSchedule.removeClass(allCourseAndSections[course][section]);
-                                System.out.println("Removed class");
-                                buildSchedule(new Schedule(newSchedule), course, section + 1);
+                                Schedule tempSched = new Schedule(newSchedule);
+                                tempSched.removeClass(allCourseAndSections[course][section]);
+                                buildSchedule(tempSched, course, section + 1);
                         }
                 
                 }

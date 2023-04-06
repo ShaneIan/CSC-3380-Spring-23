@@ -85,7 +85,7 @@ public class Schedule {
                 startTime = entry.getValue()[0];
                 endTime = entry.getValue()[1];
                 for (int i = startTime; i <= endTime; i++) {
-                        scheduleMatrix[day][i] = newClass.getCourseTitle();
+                        scheduleMatrix[day][i] = newClass.getCourseNumber();
                 }
         }
         if (newClass.isLabCourse()) {
@@ -95,7 +95,7 @@ public class Schedule {
                         startTime = entry.getValue()[0];
                         endTime = entry.getValue()[1];
                         for (int i = startTime; i <= endTime; i++) {
-                            scheduleMatrix[day][i] = newClass.getCourseTitle();
+                            scheduleMatrix[day][i] = newClass.getCourseNumber();
                         }
                 }
         }
@@ -108,11 +108,9 @@ public class Schedule {
     //timeslot string to to "-"
     public void removeClass(Course remCourse) {
         //Check if course being removed is in schedule, return if not
-        System.out.println("got here ");
         if (!containsCourse(remCourse.getCourseNumber())) {
             return;
         }
-        System.out.println("got here 1");
         HashMap<Integer, int[]> classTimes = remCourse.getSessionDayTimeMap();
         int day, startTime, endTime;
         for (Map.Entry<Integer, int[]> entry: classTimes.entrySet()) {
@@ -120,7 +118,7 @@ public class Schedule {
                 startTime = entry.getValue()[0];
                 endTime = entry.getValue()[1];
                 for (int i = startTime; i <= endTime; i++) {
-                    if (scheduleMatrix[day][i] == remCourse.getCourseTitle())
+                    if (scheduleMatrix[day][i] == remCourse.getCourseNumber())
                         scheduleMatrix[day][i] = "-";
                 }
         }
@@ -131,7 +129,7 @@ public class Schedule {
                         startTime = entry.getValue()[0];
                         endTime = entry.getValue()[1];
                         for (int i = startTime; i <= endTime; i++) {
-                            if (scheduleMatrix[day][i] == remCourse.getCourseTitle())
+                            if (scheduleMatrix[day][i] == remCourse.getCourseNumber())
                                 scheduleMatrix[day][i] = "-";
                         }
                 }

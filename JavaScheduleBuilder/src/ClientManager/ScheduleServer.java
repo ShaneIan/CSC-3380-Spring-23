@@ -1,9 +1,6 @@
 package ClientManager;
-import java.io.*;
-import java.util.*;
 import java.net.*;
 import com.sun.net.httpserver.*;
-import CourseDataManager.*;
 
 
 public class ScheduleServer {

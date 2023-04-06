@@ -5,14 +5,12 @@ import CourseObjectBuilder.*;
 import java.util.*;
 
 public class DataManager {
-    private ArrayList<String> courseSearch;
     private Course[][] coursesQueried;
     private DatabaseOperations dbOpr;
     private ScheduleBuilder scheduleBldr;
     private ArrayList<Schedule> viableSchedules;
     
     public DataManager(ArrayList<String> searchedCourses) {
-        courseSearch = searchedCourses;
         dbOpr = new DatabaseOperations();
         coursesQueried = queryCoursesFromSearch(searchedCourses);
         scheduleBldr = new ScheduleBuilder(coursesQueried);
@@ -47,7 +45,9 @@ public class DataManager {
         }
         return finalCourseSectionsList;
     }
-    //creates the SQL query
+
+    //Converts the string array returned by SQL query into a Course object using the
+    //entries in the string array as course parameters
     public Course convertQueryArrayToCourse(String[] queryArray) {
         if (queryArray[13].contains("WEB B")) {
             return null;
