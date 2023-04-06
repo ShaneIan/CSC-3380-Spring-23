@@ -36,6 +36,18 @@ public class Course extends LearningSession{
         lab = this.lab;
     }
 
+    public Course(Course courseToCopy) {
+        super(courseToCopy.getCourseTime(), courseToCopy.getCourseDays());
+        isFull = courseToCopy.getIsFull();
+        courseNumber = courseToCopy.getCourseNumber();
+        courseTitle = courseToCopy.getCourseTitle();
+        sectionNumber = courseToCopy.getSectionNumber();
+        creditHours = courseToCopy.getCreditHours();
+        instructor = courseToCopy.getInstructor();
+        hasLab = courseToCopy.isLabCourse();
+        lab = courseToCopy.getLab();
+    }
+
     public Boolean getIsFull() {
         return isFull;
     }
@@ -52,8 +64,20 @@ public class Course extends LearningSession{
         return sectionNumber;
     }
 
+    public String getCourseTime() {
+        return super.getSessionTime();
+    }
+
+    public String getCourseDays() {
+        return super.getSessionDays();
+    }
+
     public int getCreditHours() {
         return creditHours;
+    }
+
+    public String getInstructor() {
+        return instructor;
     }
 
     public Boolean isLabCourse() {
@@ -63,6 +87,7 @@ public class Course extends LearningSession{
     public Lab getLab() {
         return lab;
     }
+
 
     @Override
     public String toString() {

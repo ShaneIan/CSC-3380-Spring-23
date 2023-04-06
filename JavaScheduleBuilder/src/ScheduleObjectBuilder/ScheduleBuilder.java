@@ -17,7 +17,6 @@ public class ScheduleBuilder {
         }
 
         public void findViableSchedules() {
-                System.out.println(allCourseAndSections.length + " Courses searched");
                 buildSchedule(new Schedule(), 0, 0);
         }
 
@@ -27,40 +26,25 @@ public class ScheduleBuilder {
                         //Check if schedule already contains the course being checked
                         //if it doesn't, add the class to the schedule
                         if (!newSchedule.containsCourse(allCourseAndSections[course][section].getCourseNumber())) {
-                                System.out.println("Adding Course: " + course + " Section: " + section);
                                 newSchedule.AddClass(allCourseAndSections[course][section]);
                         }
 
-                        //If the last course in the 2D courses array has been reached, 
-                        //and the schedule contains all classes searched, add schedule to viable schedules
                         if (newSchedule.getCourses().size() == allCourseAndSections.length) {
-                                //if (newSchedule.getCourses().size() == allCourseAndSections.length) {
-
-                                        viableSchedules.add(new Schedule(newSchedule));
-                                        System.out.println("Added schedule"); 
-                                        System.out.println(Arrays.deepToString(newSchedule.getScheduleMatrix())); 
-                                        System.out.println("Current state of viable schedules:");
-                                        for (Schedule schedule: viableSchedules) {
-                                                System.out.println(Arrays.deepToString(schedule.getScheduleMatrix()));
-                                        }
-                                //}
+                                viableSchedules.add(new Schedule(newSchedule));
                         }
 
                         //If there are still courses to add, call build schedule again with the course index increased by 1
                         if (course < allCourseAndSections.length - 1) {
-                                buildSchedule(new Schedule(newSchedule), course + 1, 0);
+                                buildSchedule(newSchedule, course + 1, 0);
                         }
 
                         //If there are still sections to check for the given course, 
                         //call build schedule again with the section index increased by 1
                         if (section < allCourseAndSections[course].length - 1) {
-                                Schedule tempSched = new Schedule(newSchedule);
-                                tempSched.removeClass(allCourseAndSections[course][section]);
-                                buildSchedule(tempSched, course, section + 1);
+                                newSchedule.removeClass(allCourseAndSections[course][section]);
+                                buildSchedule(newSchedule, course, section + 1);
                         }
-                
                 }
-                return;
         }
 
         public ArrayList<Schedule> returnViableSchedules() {

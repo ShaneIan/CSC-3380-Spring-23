@@ -21,7 +21,7 @@ public class ScheduleTableBuilder {
         ArrayList<Course> courses = schedule.getCourses();
         String[][] scheduleMatrix = schedule.getScheduleMatrix();
         htmlTable.append("<head><style>");
-        htmlTable.append("table { border-collapse: separate; border-spacing: 0px 0px; } th, td { text-align: center; border: 2px solid black;}"); // Add padding to <th> tags
+        htmlTable.append("table { border-collapse: separate; border-spacing: 0px 0px; } th, td { min-width:50px, text-align: center; border: 2px solid black;}"); // Add padding to <th> tags
         htmlTable.append("</style></head>");
         for (Course course: courses) {
             htmlTable.append("<p>" + course.toString() + "</p>");

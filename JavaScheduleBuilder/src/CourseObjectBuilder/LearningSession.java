@@ -40,9 +40,9 @@ public abstract class LearningSession {
         }
         //Add 10 to get x:20 to x:30
         //Since integers are used, numbers ending in fifty will represent x:30
-        //Ex. Class ending at 4:20 would be converted to 4:30 by converting 430 to 450
+        //Ex. Class ending at 4:20 would be converted to 4:30 by converting 420 to 450
         else {
-                endTime += 10;
+                endTime += 30;
         }
 
         //Convert timeInt to index from 0 to 30

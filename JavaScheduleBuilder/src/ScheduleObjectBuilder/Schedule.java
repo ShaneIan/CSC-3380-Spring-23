@@ -23,9 +23,16 @@ public class Schedule {
 
     //Copy contructor for recursive schedule builder method
     public Schedule(Schedule prevScheduleObj) {
-        courses = prevScheduleObj.getCourses();
+        courses = new ArrayList<Course>();
+        for (Course course: prevScheduleObj.getCourses()) {
+            courses.add(new Course(course));
+        }
         totalHours = prevScheduleObj.getTotalCreditHours();
-        scheduleMatrix = prevScheduleObj.getScheduleMatrix();
+        scheduleMatrix = new String[6][31];
+        String[][] originalSchedMatrix = prevScheduleObj.getScheduleMatrix();
+        for (int i = 0; i < originalSchedMatrix.length; i++) {
+            scheduleMatrix[i] = Arrays.copyOf(originalSchedMatrix[i], originalSchedMatrix[i].length);
+        }
     }
 
     private String[][] BuildScheduleMatrix() {
