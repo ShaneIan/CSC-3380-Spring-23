@@ -204,5 +204,6 @@ public class Schedule {
                 }
             }
         }
+        return hoursBefore12;
     }
 }
