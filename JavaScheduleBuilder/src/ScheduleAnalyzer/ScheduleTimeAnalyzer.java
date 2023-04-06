@@ -36,19 +36,8 @@ public class ScheduleTimeAnalyzer implements ScheduleAnalyzer{
         throw new UnsupportedOperationException("Unimplemented method 'rateSchedule'");
     }
 
-    public int ScheduleRanker(Schedule schedule) {
-/*      int morninghours;
-        float percentmorning
-        for (i = # of classes, i < # number of classes + 1, i++) {
-            if class start && stop < 10
-                ranking point + 1
-                add class hours to morninghours
-        }
-
-        morninghours/totalhours = percentmorning
-        percentmorning * 100
-        return percentmorning
-        return ranking points*/
-        return 0;
-    } 
+    public double ScheduleRanker(Schedule schedule) {
+        double rankingpoints = schedule.getNumberHoursBeforeTwelve(); 
+        return rankingpoints;    
+    }
 }
