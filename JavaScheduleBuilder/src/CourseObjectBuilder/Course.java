@@ -91,7 +91,7 @@ public class Course extends LearningSession{
 
     @Override
     public String toString() {
-        String courseString = "Name: " + courseNumber + " Section: " + sectionNumber + " Hours: " + creditHours + " Time: " + super.getSessionTime() + " " + super.getSessionDays() + " Instructor: " + instructor;
+        String courseString = courseNumber + " Section: " + sectionNumber + super.getSessionTime() + " " + super.getSessionDays() + " Instructor: " + instructor;
         return courseString;
     }
 }

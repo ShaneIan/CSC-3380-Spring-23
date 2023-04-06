@@ -36,9 +36,7 @@ public class FormHandler implements HttpHandler{
             ArrayList<Schedule> viableSchedules = DataMngr.getViableSchedules();
             response += new ScheduleTableBuilder(viableSchedules).returnTableString();
             System.out.println("There are " + viableSchedules.size() + " viable schedules");
-            if (viableSchedules.size() == 0) {
-                response += "There were no schedules that fit the courses searched. Try a different search. \n";
-            }
+
             // send the response
             
             exchange.sendResponseHeaders(200, response.length());

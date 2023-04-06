@@ -12,6 +12,23 @@ public class ScheduleTableBuilder {
 
     public ScheduleTableBuilder(ArrayList<Schedule> schedules) {
         htmlTable = new StringBuilder().append("<html>");
+        htmlTable.append("<head><style>");
+        htmlTable.append("body { background-color: rgb(48, 20, 86); } "+
+                        "header {}" +
+                        "table { background-color: white; border-collapse: separate; border-spacing: 0px 0px; } " +
+                        "th, td { text-align: center; border: 1px solid black; width:10%;} " +
+                        "p { color: white;}"); // Add padding to <th> tags
+        htmlTable.append("</style></head><body><header><div><a href=\"https://www.lsu.edu\">" +
+                        "<img src=\"https://www.lsu.edu/_resources_fierce/svgs/lsu-logo.svg\" alt=\"Louisiana State University\" style=\"object-position: left;width: 250px;\"></a>"+
+                        "<a href=\"https://sso.paws.lsu.edu/login?service=https%3A%2F%2Fmylsu.apps.lsu.edu%2Fc%2Fportal%2Flogin\">" +
+                        "<img src=\"https://logolook.net/wp-content/uploads/2022/02/LSU-Tigers-Logo-1955-768x432.png\" alt=\"Mikey\" style=\"object-position:right; width: 400px; float: right;\"></a></div></header>");
+        htmlTable.append("<div><h1 style=\"color: white;\">LSU Automatic Scheduler</h1></div>");
+        if (schedules.size() > 0) {
+            htmlTable.append("<div><h2 style=\"color: white;\">Your course search returned the following options:</h2></div>");
+        }
+        else {
+            htmlTable.append("<div><p>There were no schedules that fit the courses searched. Try a different search.</p></div>");
+        }
         for (Schedule schedule: schedules) { 
             buildTable(schedule);
         }
@@ -20,9 +37,6 @@ public class ScheduleTableBuilder {
     private void buildTable(Schedule schedule) {
         ArrayList<Course> courses = schedule.getCourses();
         String[][] scheduleMatrix = schedule.getScheduleMatrix();
-        htmlTable.append("<head><style>");
-        htmlTable.append("table { border-collapse: separate; border-spacing: 0px 0px; } th, td { min-width:50px, text-align: center; border: 2px solid black;}"); // Add padding to <th> tags
-        htmlTable.append("</style></head>");
         for (Course course: courses) {
             htmlTable.append("<p>" + course.toString() + "</p>");
         }
@@ -55,7 +69,7 @@ public class ScheduleTableBuilder {
     }
 
     public String returnTableString() {
-        htmlTable.append("</html>");
+        htmlTable.append("</body></html>");
         return htmlTable.toString();
     }
 }
