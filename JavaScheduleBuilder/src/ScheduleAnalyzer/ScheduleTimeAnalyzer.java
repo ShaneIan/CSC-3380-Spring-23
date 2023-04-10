@@ -21,9 +21,9 @@ public class ScheduleTimeAnalyzer implements ScheduleAnalyzer{
         //for(all schedules)
         //ScheduleRanker(Schedule)
         //sort schedules on highest to lowest percentmorning
-        throw new UnsupportedOperationException("Unimplemented method 'rateSchedule'");
-
-    
+        //throw new UnsupportedOperationException("Unimplemented method 'rateSchedule'");
+        int[] arr = new int[schedules.length]; 
+        
         int n = arr.length;
     
         for (int i = 0; i < n - 1; i++) {
