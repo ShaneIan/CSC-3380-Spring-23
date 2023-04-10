@@ -201,9 +201,9 @@ public class Schedule {
         double hoursBefore12 = 0.0;
         for (ArrayList<int[]> day: times.values()) {
             for (int[] classTime: day) {
-                int startTime = classTime[0];
-                int endTime = classTime[1];
-                if (startTime > 10) {  //shouldnt this be less than
+                double startTime = classTime[0];
+                double endTime = classTime[1];
+                if (startTime > 10) {  //shouldnt this be <
                     while (startTime < endTime) {
                         hoursBefore12 += 0.5;
                         startTime++;
@@ -218,18 +218,9 @@ public class Schedule {
         HashMap<Integer, ArrayList<int[]>> times = getClassTimes();
         double hoursOfGapTime = 0.0;
         for (ArrayList<int[]> day: times.values()) {
-            for (int[] classTime: day) {
-                /*
-                
-                */
-                if (startTime != endTime) {  //shouldnt this be less than
-                    while (startTime < endTime) {
-                        hoursBefore12 += 0.5;
-                        startTime++;
-                    }
-                }
+            
             }
         }
-        return hoursBefore12;
+        return hoursOfGapTime;
     }
 }
