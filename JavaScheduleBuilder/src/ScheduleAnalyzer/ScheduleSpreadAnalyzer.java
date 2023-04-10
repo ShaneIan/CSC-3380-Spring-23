@@ -66,6 +66,6 @@ public class ScheduleSpreadAnalyzer implements ScheduleAnalyzer{
         double rankingpoints = schedule.getNumberHoursOfGap(); 
         return rankingpoints;     
     }
-    
-}
 */
+}
+
