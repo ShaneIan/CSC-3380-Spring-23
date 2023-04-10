@@ -61,10 +61,11 @@ public class ScheduleSpreadAnalyzer implements ScheduleAnalyzer{
         //return schedulesHashMap.get(sortedSchedulesArray[sortedSchedulesArray.length - 1]);
 
     }
-
+/*
     public double ScheduleRanker(Schedule schedule) {  //returns total number of hours before 12 for a certain schedule
         double rankingpoints = schedule.getNumberHoursOfGap(); 
-        return rankingpoints;    
+        return rankingpoints;     
     }
     
 }
+*/
