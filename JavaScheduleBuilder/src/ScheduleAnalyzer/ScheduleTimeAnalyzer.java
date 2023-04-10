@@ -3,10 +3,16 @@ import ScheduleObjectBuilder.*;
 //Class specifically for analyzing the timing of schedules to  
 public class ScheduleTimeAnalyzer implements ScheduleAnalyzer{
     private Schedule[] schedules;
+    HashMap<int, Schedule> schedulesHashMap;
+    int[] sortedSchedulesArray;
 
 
     public ScheduleTimeAnalyzer(Schedule[] schedules) {
         schedules = this.schedules;
+        sortedSchedulesArray = rankScheduleOptions;
+        for(int i = 0; i < schedules.length; i++){  //key:original index in schedules value: schedule 
+            schedulesHashMap.put(i, schedules[i]);
+        }
     }
 
     @Override
@@ -16,40 +22,48 @@ public class ScheduleTimeAnalyzer implements ScheduleAnalyzer{
     }
 
     @Override
-    public void rankScheduleOptions() {
-        // Rank all schedules by greatest to lowest morning class percentage score
-        //for(all schedules)
-        //ScheduleRanker(Schedule)
-        //sort schedules on highest to lowest percentmorning
-        //throw new UnsupportedOperationException("Unimplemented method 'rateSchedule'");
-        int[] arr = new int[schedules.length]; 
+
+    public int[] rankScheduleOptions() {  //returns a sorted array of key values for schedulesHashMap based on morning rank
         
-        int n = arr.length;
-    
+        //throw new UnsupportedOperationException("Unimplemented method 'rateSchedule'");
+        int[] arrayOfKeys = new int[schedules.length];
+        for (int i = 0; i < schedules.length; i++){
+            arrayOfKeys[i] = i
+        }
+        int[] arrayOfRanks = new int[schedules.length];
+        for (int i = 0; i < schedules.length; i++){
+            arrayOfRanks[i] = ScheduleRanker(schedules[i]) //this could be schedules[i].getNumberHoursBeforeTwelve
+        }
+        int n = schedules.length;
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
-                if (arr[j] > arr[j + 1]) {
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
+                if (arrayOfRanks[j] < arrayOfRanks[j + 1]) {
+                    int temp = arrayOfRanks[j];
+                    arrayOfRanks[j] = arrayOfRanks[j + 1];
+                    arrayOfRanks[j + 1] = temp;
+                    int temp = arrayOfKeys[j];
+                    arrayOfKeys[j] = arrayOfKeys[j + 1];
                     arr[j + 1] = temp;
                 }
             }
         }
+        return arrayOfKeys;
     }
 
     @Override
-    public void getHighestRankedScheduleOption() {
-        // Get schedule with highest percentage of morning classes 
-        throw new UnsupportedOperationException("Unimplemented method 'rateSchedule'");
+    public void getHighestRankedScheduleOption() { //returns schedule with most amount of morning hours 
+        //throw new UnsupportedOperationException("Unimplemented method 'rateSchedule'");
+        return schedulesHashMap.get(sortedSchedulesArray[0]);
     }
 
     @Override
-    public void getLowestRankedScheduleOption() {
-        // Get schedule with lowest percentage of morning classes
-        throw new UnsupportedOperationException("Unimplemented method 'rateSchedule'");
+    public void getLowestRankedScheduleOption() { //returns schedule with the least amount of hours before 12
+        
+        //throw new UnsupportedOperationException("Unimplemented method 'rateSchedule'");
+        return schedulesHashMap.get(sortedSchedulesArray[sortedSchedulesArray.length - 1]);
     }
 
-    public double ScheduleRanker(Schedule schedule) {
+    public double ScheduleRanker(Schedule schedule) {  //returns total number of hours before 12 for a certain schedule
         double rankingpoints = schedule.getNumberHoursBeforeTwelve(); 
         return rankingpoints;    
     }
