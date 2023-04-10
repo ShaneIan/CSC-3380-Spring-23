@@ -12,10 +12,16 @@ public class DataManager {
     
     public DataManager(ArrayList<String> searchedCourses) {
         dbOpr = new DatabaseOperations();
-        coursesQueried = queryCoursesFromSearch(searchedCourses);
-        scheduleBldr = new ScheduleBuilder(coursesQueried);
-        viableSchedules = scheduleBldr.returnViableSchedules();
-        scheduleBldr.returnViableScheduleMatrices();
+        if (searchedCourses.size() > 0) {
+            coursesQueried = queryCoursesFromSearch(searchedCourses);
+            scheduleBldr = new ScheduleBuilder(coursesQueried);
+            viableSchedules = scheduleBldr.returnViableSchedules();
+        }
+        else {
+            coursesQueried = null;
+            scheduleBldr = null;
+            viableSchedules = new ArrayList<>();
+        }
     }
 
     //Take ArrayList<String> from html form, convert each string from

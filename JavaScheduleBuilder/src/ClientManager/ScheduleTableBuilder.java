@@ -23,6 +23,7 @@ public class ScheduleTableBuilder {
                         "<a href=\"https://sso.paws.lsu.edu/login?service=https%3A%2F%2Fmylsu.apps.lsu.edu%2Fc%2Fportal%2Flogin\">" +
                         "<img src=\"https://logolook.net/wp-content/uploads/2022/02/LSU-Tigers-Logo-1955-768x432.png\" alt=\"Mikey\" style=\"object-position:right; width: 400px; float: right;\"></a></div></header>");
         htmlTable.append("<div><h1 style=\"color: white;\">LSU Automatic Scheduler</h1></div>");
+        htmlTable.append("<form><input type=\"button\" value=\"Back\" onclick=\"history.back()\"></form>");
         if (schedules.size() > 0) {
             htmlTable.append("<div><h2 style=\"color: white;\">Your course search returned the following options:</h2></div>");
         }

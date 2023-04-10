@@ -27,28 +27,31 @@
 </head>
 
 <body style="background-color: rgb(48, 20, 86);">
-    <header id="header" style="background-color: rgb(48, 20, 86);">
+    <header id="header" style="background-color: rgb(48, 20, 86); padding: 20px;">
         <div class="logo">
             <a href="https://www.lsu.edu"><img src="https://www.lsu.edu/_resources_fierce/svgs/lsu-logo.svg" class="menu_logo" alt="Louisiana State University" style="object-position: left;width: 250px;"></a>
             <a href="https://sso.paws.lsu.edu/login?service=https%3A%2F%2Fmylsu.apps.lsu.edu%2Fc%2Fportal%2Flogin"><img src="https://logolook.net/wp-content/uploads/2022/02/LSU-Tigers-Logo-1955-768x432.png" class="Mike_The_Tiger" alt="Mikey" style="object-position:right; width: 400px; float: right;"></a>
         </div>
     </header>
-    <div class="TitleHeader">
-        <h1 style="color: white;">LSU Automatic Scheduler</h1>
-    </div class="ClassSearch">
-    <div>
-        <p style="color: white;">Enter class code as listed<br>Ex. "CSC 3380"</p>
+    <div style="margin: auto;
+            padding: 10px;">
+        <div class="TitleHeader">
+            <h1 style="color: white;">LSU Automatic Scheduler</h1>
+        </div class="ClassSearch">
+        <div style="margin-left: 15px;">
+            <p style="color: white;">Enter class code as listed<br>Ex. "CSC 3380"</p>
+        </div>
+        <form method="POST" action="/submit">
+            <div id="field-container">
+            <div><input type="text" name="field1"/></div>
+            </div>
+            <button type="button" style="border-radius: 6px; margin-top: 5px;" onclick="addField()">Add Class</button>
+            <button type="button" style="border-radius: 6px; margin-top: 5px;" onclick="removeField()">Remove Class</button>
+            <div id="searchButon" style="margin-top: 5px;">
+                <button type="submit" style="border-radius: 6px;">Search</button>
+            </div>
+        </form>
     </div>
-    <form method="POST" action="/submit">
-        <div id="field-container">
-          <div><input type="text" name="field1"/></div>
-        </div>
-        <button type="button" onclick="addField()">Add Class</button>
-        <button type="button" onclick="removeField()">Remove Class</button>
-        <div id="searchButon">
-            <button type="submit">Search</button>
-        </div>
-      </form>
 </body>
 
 </html>
