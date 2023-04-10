@@ -9,7 +9,7 @@ public class ScheduleTimeAnalyzer implements ScheduleAnalyzer{
 
     public ScheduleTimeAnalyzer(Schedule[] schedules) {
         schedules = this.schedules;
-        sortedSchedulesArray = rankScheduleOptions;
+        sortedSchedulesArray = rankScheduleOptions();
         for(int i = 0; i < schedules.length; i++){  //key:original index in schedules value: schedule 
             schedulesHashMap.put(i, schedules[i]);
         }

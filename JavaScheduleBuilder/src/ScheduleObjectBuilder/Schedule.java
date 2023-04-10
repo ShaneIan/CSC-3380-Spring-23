@@ -203,7 +203,7 @@ public class Schedule {
             for (int[] classTime: day) {
                 int startTime = classTime[0];
                 int endTime = classTime[1];
-                if (startTime > 10) {
+                if (startTime > 10) {  //shouldnt this be less than
                     while (startTime < endTime) {
                         hoursBefore12 += 0.5;
                         startTime++;
@@ -212,5 +212,9 @@ public class Schedule {
             }
         }
         return hoursBefore12;
+    }
+
+    public double getNumberHoursOfGap(){  //needs to be implemented shoul work like getNumberHoursBeforeTwelve
+        return null;
     }
 }
