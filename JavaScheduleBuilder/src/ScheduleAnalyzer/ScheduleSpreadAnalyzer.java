@@ -48,6 +48,7 @@ public class ScheduleSpreadAnalyzer implements ScheduleAnalyzer{
 
     @Override
     public void getHighestRankedScheduleOption() {
+        // public schedule getHighest user .get()
         // Get schedule with least time between classes, i.e., schedule with least time spread
         throw new UnsupportedOperationException("Unimplemented method 'getBestScheduleOption'");
         //return schedulesHashMap.get(sortedSchedulesArray[0]);
