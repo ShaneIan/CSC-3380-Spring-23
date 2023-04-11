@@ -38,6 +38,7 @@ public class Schedule {
         classTimes = buildClassPerDayMap();
     }
 
+    //
     private String[][] BuildScheduleMatrix() {
         String[][] scheduleArray = new String[6][31];
         for (String[] Day: scheduleArray)

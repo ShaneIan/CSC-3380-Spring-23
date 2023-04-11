@@ -1,7 +1,7 @@
 package ScheduleAnalyzer;
 import ScheduleObjectBuilder.*;
 import java.util.*;
-//Class specifically for analyzing the timing of schedules to  
+//Class specifically for analyzing the timing of schedules  
 public class ScheduleTimeAnalyzer implements ScheduleAnalyzer{
     private Schedule[] schedules;
     HashMap<Integer, Schedule> schedulesHashMap = new HashMap<Integer, Schedule>();
@@ -18,13 +18,11 @@ public class ScheduleTimeAnalyzer implements ScheduleAnalyzer{
 
     @Override
     public void rankScheduleOptions() {  //returns a sorted array of key values for schedulesHashMap based on morning rank
-        
-        //throw new UnsupportedOperationException("Unimplemented method 'rateSchedule'");
-        int[] arrayOfKeys = new int[schedules.length];
+                int[] arrayOfKeys = new int[schedules.length];
         double[] arrayOfRanks = new double[schedules.length];
         for (int i = 0; i < schedules.length; i++){
             arrayOfKeys[i] = i;
-            arrayOfRanks[i] = ScheduleRanker(schedules[i]); //this could be schedules[i].getNumberHoursBeforeTwelve
+            arrayOfRanks[i] = ScheduleRanker(schedules[i]);
 
         }
         
@@ -52,18 +50,18 @@ public class ScheduleTimeAnalyzer implements ScheduleAnalyzer{
     }
 
     @Override
-    public Schedule getLowestRankedScheduleOption() { //returns schedule with the most amount of hours before 12
+    public Schedule getLowestRankedScheduleOption() { //returns schedule with the most amount of morning hours
         return schedulesHashMap.get(sortedSchedulesArray[sortedSchedulesArray.length - 1]);
     }
 
-    public double ScheduleRanker(Schedule schedule) { //returns total number of hours before 12 for a certain schedule
+    public double ScheduleRanker(Schedule schedule) { //returns total number of hours after 12 for a certain schedule
         HashMap<Integer, ArrayList<int[]>> times = schedule.getClassTimes();
         double rankingpoints = 0.0;
         for (ArrayList<int[]> day: times.values()) {
             for (int[] classTime: day) {
                 double startTime = classTime[0];
                 double endTime = classTime[1];
-                if (startTime > 10) {  //shouldnt this be <
+                if (startTime > 10) { 
                     while (startTime < endTime) {
                         rankingpoints += 0.5;
                         startTime++;

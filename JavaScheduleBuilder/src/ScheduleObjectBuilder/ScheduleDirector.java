@@ -27,12 +27,10 @@ public class ScheduleDirector {
 
         public void makeCourseCombinations(ScheduleBuilderImpl schedbldr, Schedule newSchedule, int course, int section) {
                 if (schedbldr.checkCourseTimesConflict(newSchedule, allCourseAndSections[course][section])) {
-                        //System.out.println(Arrays.deepToString(newSchedule.getScheduleMatrix()));
                         //Check if schedule already contains the course being checked
                         //if it doesn't, add the class to the schedule
                         if (!schedbldr.containsCourse(newSchedule, allCourseAndSections[course][section].getCourseNumber())) {
                                 schedbldr.addCourse(newSchedule, allCourseAndSections[course][section]);
-                                //newSchedule.AddClass(allCourseAndSections[course][section]);
                         }
 
                         if (newSchedule.getCourses().size() == allCourseAndSections.length) {
@@ -48,7 +46,6 @@ public class ScheduleDirector {
                         //call build schedule again with the section index increased by 1
                         if (section < allCourseAndSections[course].length - 1) {
                                 schedbldr.removeCourse(newSchedule, allCourseAndSections[course][section]);
-                                //newSchedule.removeClass(allCourseAndSections[course][section]);
                                 makeCourseCombinations(schedbldr, newSchedule, course, section + 1);
                         }
                 }

@@ -110,6 +110,8 @@ public class ScheduleBuilderImpl implements ScheduleBuilder {
         schedule.getCourses().remove(course);
     }
 
+    //Checks if the schedule passed to the method contains the course passed to the method
+    //If it contains the course code, return true, else, return false
     @Override
     public boolean containsCourse(Schedule schedule, String courseCode) {
         for (Course course: schedule.getCourses()) {
