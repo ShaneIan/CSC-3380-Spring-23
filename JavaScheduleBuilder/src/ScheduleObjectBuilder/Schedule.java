@@ -217,8 +217,13 @@ public class Schedule {
     public double getNumberHoursOfGap(){  //needs to be implemented shoul work like getNumberHoursBeforeTwelve
         HashMap<Integer, ArrayList<int[]>> times = getClassTimes();
         double hoursOfGapTime = 0.0;
-        for (ArrayList<int[]> day: times.values()) {
-            
+        for (int day = 0; day <= 4; day++){
+            ArrayList<int[]> classes = times.get(day);
+            int numberClasses = classes.size();
+            for (int i = 1; i < numberClasses; i++){
+                int[] classPrevious = classes.get(i-1);
+                int[] classCurrent = classes.get(i);
+                hoursOfGapTime = classPrevious[1] - classCurrent[0];
             }
         }
         return hoursOfGapTime;
