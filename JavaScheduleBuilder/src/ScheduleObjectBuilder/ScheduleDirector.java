@@ -9,7 +9,7 @@ public class ScheduleDirector {
         private ScheduleSpreadAnalyzer spreadRanker;
         private ScheduleTimeAnalyzer timeRanker;
 
-        public ScheduleDirector(ScheduleBuilderImpl schedbldr, Course[][] courses) {
+        public ScheduleDirector(ScheduleBuilder schedbldr, Course[][] courses) {
                 allCourseAndSections = courses;
                 viableSchedules = new ArrayList<>();
                 findViableSchedules(schedbldr);
@@ -21,11 +21,11 @@ public class ScheduleDirector {
                 timeRanker = new ScheduleTimeAnalyzer(viableSchedArr);
         }
 
-        public void findViableSchedules(ScheduleBuilderImpl schedbldr) {
+        public void findViableSchedules(ScheduleBuilder schedbldr) {
                 makeCourseCombinations(schedbldr, new Schedule(), 0, 0);
         }
 
-        public void makeCourseCombinations(ScheduleBuilderImpl schedbldr, Schedule newSchedule, int course, int section) {
+        public void makeCourseCombinations(ScheduleBuilder schedbldr, Schedule newSchedule, int course, int section) {
                 if (schedbldr.checkCourseTimesConflict(newSchedule, allCourseAndSections[course][section])) {
                         //Check if schedule already contains the course being checked
                         //if it doesn't, add the class to the schedule
