@@ -50,6 +50,7 @@ public class DatabaseOperations {
     //Builds a course query from given abbreviation and courseNumber and returns all sections of that course
     //Ex. fetchDataByCourseCode("ACCT", "1001") would returns all sections of ACCT 1001
     public String[][] fetchDataByCourseCode(String abbreviation, String courseNumber) {
+        abbreviation = abbreviation.toUpperCase(); 
         ArrayList<String[]> dataList = new ArrayList<>();
         Connection connection = null;
         Statement statement = null;
