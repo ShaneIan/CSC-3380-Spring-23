@@ -22,6 +22,7 @@ public class ScheduleBuilderImpl implements ScheduleBuilder {
                         scheduleMatrix[day][i] = course.getCourseNumber();
                 }
         }
+        //handles any course with labs, taking into account the separate times for the lab and the class
         if (course.isLabCourse()) {
                 HashMap<Integer, int[]> labTimes = course.getSessionDayTimeMap();
                 for (Map.Entry<Integer, int[]> entry: labTimes.entrySet()) {
@@ -57,6 +58,7 @@ public class ScheduleBuilderImpl implements ScheduleBuilder {
                         }
                 }
         }
+        //handles any course with labs, taking into account the separate times for the lab and the class
         if (course.isLabCourse()) {
                 HashMap<Integer, int[]> labTimes = course.getSessionDayTimeMap();
                 for (Map.Entry<Integer, int[]> entry: labTimes.entrySet()) {
@@ -95,6 +97,7 @@ public class ScheduleBuilderImpl implements ScheduleBuilder {
                         scheduleMatrix[day][i] = "-";
                 }
         }
+        //handles any course with labs, taking into account the separate times for the lab and the class
         if (course.isLabCourse()) {
                 HashMap<Integer, int[]> labTimes = course.getSessionDayTimeMap();
                 for (Map.Entry<Integer, int[]> entry: labTimes.entrySet()) {
@@ -110,6 +113,7 @@ public class ScheduleBuilderImpl implements ScheduleBuilder {
         schedule.getCourses().remove(course);
     }
 
+    
     @Override
     public boolean containsCourse(Schedule schedule, String courseCode) {
         for (Course course: schedule.getCourses()) {
