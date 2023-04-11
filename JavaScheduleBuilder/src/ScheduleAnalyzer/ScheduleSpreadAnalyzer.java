@@ -46,7 +46,6 @@ public class ScheduleSpreadAnalyzer implements ScheduleAnalyzer{
     public Schedule getHighestRankedScheduleOption() {
         // public schedule getHighest user .get()
         // Get schedule with least time between classes, i.e., schedule with least time spread
-        System.out.println(Arrays.toString(sortedSchedulesArray));
         return schedulesHashMap.get(sortedSchedulesArray[0]);
 
     }
@@ -64,14 +63,15 @@ public class ScheduleSpreadAnalyzer implements ScheduleAnalyzer{
         for (int day = 0; day <= 4; day++){
             ArrayList<int[]> classes = times.get(day);
             int numberClasses = classes.size();
-            for (int i = 1; i < numberClasses; i++){
-                int[] classPrevious = classes.get(i-1);
-                int[] classCurrent = classes.get(i);
-                rankingpoints = classPrevious[1] - classCurrent[0];
+            if (numberClasses > 1) {
+                for (int i = 1; i < numberClasses; i++){
+                    int[] classPrevious = classes.get(i-1);
+                    int[] classCurrent = classes.get(i);
+                    rankingpoints = classCurrent[0] - classPrevious[1];
+                }
             }
         }
-        return rankingpoints;     
+        return Math.abs(rankingpoints);     
     }
-
 }
 

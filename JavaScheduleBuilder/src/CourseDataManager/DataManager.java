@@ -25,9 +25,7 @@ public class DataManager {
             highestRankedMorning = scheduleDir.getMorningAnalyzer().getHighestRankedScheduleOption();
             lowestRankedMorning = scheduleDir.getMorningAnalyzer().getLowestRankedScheduleOption();
             highestRankedSpread = scheduleDir.getSpreadAnalyzer().getHighestRankedScheduleOption();
-            System.out.println("getHighestRankedScheduleOption worked");
             lowestRankedSpread = scheduleDir.getSpreadAnalyzer().getLowestRankedScheduleOption();
-            System.out.println("this worked");
         }
         else {
             coursesQueried = null;
@@ -38,7 +36,6 @@ public class DataManager {
             highestRankedSpread = null;
             lowestRankedSpread = null;
         }
-        System.out.println("Made data manager success");
     }
 
     //Take ArrayList<String> from html form, convert each string from

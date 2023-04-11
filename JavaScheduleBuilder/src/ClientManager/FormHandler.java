@@ -60,13 +60,13 @@ public class FormHandler implements HttpHandler{
             //Handle Html result when there are several viable schedules that can be ranked
             else if (viableSchedules.size() > 1) {
                 responseHTML.append("<div><h2 style=\"color: white;\">Your course search returned " + viableSchedules.size() + " schedule configurations. Here are the highest ranked options:</h2></div>");
-                responseHTML.append("<p>Morning Course Heavy Schedule</p>");
+                responseHTML.append("<p><strong>Morning Course Heavy Schedule</strong></p>");
                 responseHTML.append(new ScheduleTableBuilder(DataMngr.getLowestRankedMorningSched()).returnTableString());
-                responseHTML.append("<p>Afternoon Course Heavy Schedule</p>");
+                responseHTML.append("<p><strong>Afternoon Course Heavy Schedule</strong></p>");
                 responseHTML.append(new ScheduleTableBuilder(DataMngr.getHighestRankedMorningSched()).returnTableString());
-                responseHTML.append("<p>Schedule with Minimal Time Between Courses</p>");
+                responseHTML.append("<p><strong>Schedule with Minimal Time Between Courses</strong></p>");
                 responseHTML.append(new ScheduleTableBuilder(DataMngr.getLowestRankedSpreadSched()).returnTableString());
-                responseHTML.append("<p>Schedule with Maximal Time Between Courses</p>");
+                responseHTML.append("<p><strong>Schedule with Maximal Time Between Courses</strong></p>");
                 responseHTML.append(new ScheduleTableBuilder(DataMngr.getHighestRankedSpreadSched()).returnTableString());
             }
 
