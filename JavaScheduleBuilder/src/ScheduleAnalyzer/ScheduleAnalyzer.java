@@ -1,10 +1,11 @@
 package ScheduleAnalyzer;
+import ScheduleObjectBuilder.Schedule;
 
 public interface ScheduleAnalyzer {
 
     public void rankScheduleOptions();
 
-    public void getHighestRankedScheduleOption();
+    public Schedule getHighestRankedScheduleOption();
 
-    public void getLowestRankedScheduleOption();
+    public Schedule getLowestRankedScheduleOption();
 }
