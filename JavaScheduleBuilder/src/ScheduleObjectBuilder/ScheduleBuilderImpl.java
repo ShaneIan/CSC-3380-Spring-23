@@ -43,7 +43,6 @@ public class ScheduleBuilderImpl implements ScheduleBuilder {
     //indicates a filled timeslot
     @Override
     public boolean checkCourseTimesConflict(Schedule schedule, Course course) {
-        System.out.println(course.toString());
         HashMap<Integer, int[]> classTimes = course.getSessionDayTimeMap();
         int day, startTime, endTime;
         String[][] scheduleMatrix = schedule.getScheduleMatrix();
