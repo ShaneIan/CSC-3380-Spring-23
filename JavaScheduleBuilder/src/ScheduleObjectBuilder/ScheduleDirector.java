@@ -54,14 +54,17 @@ public class ScheduleDirector {
                 }
         }
 
+        //returns a list of viable schedules
         public ArrayList<Schedule> returnViableSchedules() {
                 return viableSchedules;
         }
 
+        //returns the spreadRanker, ranks based on gap between class times
         public ScheduleSpreadAnalyzer getSpreadAnalyzer() {
                 return spreadRanker;
         }
 
+        //returns the timeRanker, ranks based on the time between classes
         public ScheduleTimeAnalyzer getMorningAnalyzer() {
                 return timeRanker;
         }
