@@ -195,32 +195,4 @@ public class Schedule {
     public String[][] getScheduleMatrix() {
         return scheduleMatrix;
     }
-
-    public double getNumberHoursBeforeTwelve() {
-        HashMap<Integer, ArrayList<int[]>> times = getClassTimes();
-        double hoursBefore12 = 0.0;
-        for (ArrayList<int[]> day: times.values()) {
-            for (int[] classTime: day) {
-                double startTime = classTime[0];
-                double endTime = classTime[1];
-                if (startTime > 10) {  //shouldnt this be <
-                    while (startTime < endTime) {
-                        hoursBefore12 += 0.5;
-                        startTime++;
-                    }
-                }
-            }
-        }
-        return hoursBefore12;
-    }
-
-    public double getNumberHoursOfGap(){  //needs to be implemented shoul work like getNumberHoursBeforeTwelve
-        HashMap<Integer, ArrayList<int[]>> times = getClassTimes();
-        double hoursOfGapTime = 0.0;
-        for (ArrayList<int[]> day: times.values()) {
-            
-            }
-        }
-        return hoursOfGapTime;
-    }
 }

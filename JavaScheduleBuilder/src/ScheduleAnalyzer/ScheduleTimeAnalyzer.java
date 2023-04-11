@@ -59,7 +59,20 @@ public class ScheduleTimeAnalyzer implements ScheduleAnalyzer{
     }
 
     public double ScheduleRanker(Schedule schedule) {  //returns total number of hours before 12 for a certain schedule
-        double rankingpoints = schedule.getNumberHoursBeforeTwelve(); 
-        return rankingpoints;    
+        HashMap<Integer, ArrayList<int[]>> times = schedule.getClassTimes();
+        double hoursBefore12 = 0.0;
+        for (ArrayList<int[]> day: times.values()) {
+            for (int[] classTime: day) {
+                double startTime = classTime[0];
+                double endTime = classTime[1];
+                if (startTime > 10) {  //shouldnt this be <
+                    while (startTime < endTime) {
+                        hoursBefore12 += 0.5;
+                        startTime++;
+                    }
+                }
+            }
+        }
+        return hoursBefore12;
     }
 }
