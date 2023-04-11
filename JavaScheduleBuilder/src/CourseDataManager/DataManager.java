@@ -7,19 +7,20 @@ import java.util.*;
 public class DataManager {
     private Course[][] coursesQueried;
     private DatabaseOperations dbOpr;
-    private ScheduleBuilder scheduleBldr;
+    private ScheduleDirector scheduleDir;
     private ArrayList<Schedule> viableSchedules;
     
     public DataManager(ArrayList<String> searchedCourses) {
         dbOpr = new DatabaseOperations();
         if (searchedCourses.size() > 0) {
             coursesQueried = queryCoursesFromSearch(searchedCourses);
-            scheduleBldr = new ScheduleBuilder(coursesQueried);
-            viableSchedules = scheduleBldr.returnViableSchedules();
+            ScheduleBuilderImpl scheduleBldr = new ScheduleBuilderImpl();
+            scheduleDir = new ScheduleDirector(scheduleBldr, coursesQueried);
+            viableSchedules = scheduleDir.returnViableSchedules();
         }
         else {
             coursesQueried = null;
-            scheduleBldr = null;
+            scheduleDir = null;
             viableSchedules = new ArrayList<>();
         }
     }
