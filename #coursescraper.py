@@ -29,7 +29,7 @@ def scrape_data_from_site(url, session):
         lines = data.text.split('\n')
         class_pattern = re.compile(r'^(\d+|\(F\))')
         for line in lines:
-            if "*" not in line and "AVL" not in line[0:3] and "   " not in line[0:3] and "-" not in line[0:3] and line[0:3] != "":
+            if "*" not in line and "AVL" not in line[0:3] and "   " not in line[0:3] and "-" not in line[0:3] and line[0:3] != "" and "WEB" not in line[100:113]:
                 class_info = {
                     'avl_cnt': line[0:3].strip(),
                     'enrl_cnt': line[4:9].strip(),
