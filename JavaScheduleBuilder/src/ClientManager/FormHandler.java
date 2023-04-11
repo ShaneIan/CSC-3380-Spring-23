@@ -31,9 +31,7 @@ public class FormHandler implements HttpHandler{
                 //response += entry.getValue() + "\n";
                 coursesSearched.add(entry.getValue());
             }
-            System.out.println("\n");
             DataManager DataMngr= new DataManager(coursesSearched);
-            System.out.println("Data manager made successfully");
             ArrayList<Schedule> viableSchedules = DataMngr.getViableSchedules();
 
             //Setting style and basic elements of HTML response string
