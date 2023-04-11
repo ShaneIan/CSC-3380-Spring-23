@@ -17,12 +17,6 @@ public class ScheduleTimeAnalyzer implements ScheduleAnalyzer{
     }
 
     @Override
-    public void rateSchedule() {
-        // Rate Schedule by what percentage of classes occur before 12:00 PM 
-        throw new UnsupportedOperationException("Unimplemented method 'rateSchedule'");
-    }
-
-    @Override
 
     public void rankScheduleOptions() {  //returns a sorted array of key values for schedulesHashMap based on morning rank
         

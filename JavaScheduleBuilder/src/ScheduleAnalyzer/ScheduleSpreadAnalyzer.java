@@ -14,11 +14,6 @@ public class ScheduleSpreadAnalyzer implements ScheduleAnalyzer{
         }
         rankScheduleOptions(); //sets sortedSchedulesArray
     }
-    @Override
-    public void rateSchedule() {
-        // Rate Schedule by amount of time between classes, summed over each day
-        throw new UnsupportedOperationException("Unimplemented method 'rateSchedule'");
-    }
 
     @Override
     public void rankScheduleOptions() {
