@@ -61,10 +61,22 @@ public class ScheduleSpreadAnalyzer implements ScheduleAnalyzer{
     public double ScheduleRanker(Schedule schedule) {  //returns total number of hours before 12 for a certain schedule
         HashMap<Integer, ArrayList<int[]>> times = schedule.getClassTimes();
         double hoursOfGapTime = 0.0;
-        /*for (ArrayList<int[]> day: times.values()) {
-            
-            }
-        }*/
+        for (ArrayList<int[]> day: times.values()){
+            for(int i = 0; i<day.size() -1; i++){
+                int[] classTime1 = day.get(i);
+                int[] classTime2 = day.get(i+1);
+                double end, start;
+                end = classTime1[1];
+                start = classTime2[0];
+                if(end != start){
+                    while(start < end){
+                        hoursOfGapTime += 0.5;
+                        start++;
+                    }
+                }
+
+            }  
+        }
         return hoursOfGapTime;
     }
 
