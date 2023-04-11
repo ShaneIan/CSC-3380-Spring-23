@@ -36,6 +36,7 @@ public class Course extends LearningSession{
         lab = this.lab;
     }
 
+    //Course constructor for making a deep copy of a preexisting course
     public Course(Course courseToCopy) {
         super(courseToCopy.getCourseTime(), courseToCopy.getCourseDays());
         isFull = courseToCopy.getIsFull();

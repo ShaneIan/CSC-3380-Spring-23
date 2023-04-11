@@ -45,14 +45,14 @@ public class ScheduleSpreadAnalyzer implements ScheduleAnalyzer{
     @Override
     public Schedule getHighestRankedScheduleOption() {
         // public schedule getHighest user .get()
-        // Get schedule with least time between classes, i.e., schedule with least time spread
+        // Get schedule with least time between classes, i.e., schedule with most time spread
         return schedulesHashMap.get(sortedSchedulesArray[0]);
 
     }
 
     @Override
     public Schedule getLowestRankedScheduleOption() {
-        // Get schedule with most time between classes, i.e., schedule with most time spread
+        // Get schedule with most time between classes, i.e., schedule with least time spread
         return schedulesHashMap.get(sortedSchedulesArray[sortedSchedulesArray.length - 1]);
 
     }

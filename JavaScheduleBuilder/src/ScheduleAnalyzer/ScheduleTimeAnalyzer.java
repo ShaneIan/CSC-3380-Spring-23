@@ -47,16 +47,16 @@ public class ScheduleTimeAnalyzer implements ScheduleAnalyzer{
     }
 
     @Override
-    public Schedule getHighestRankedScheduleOption() { //returns schedule with most amount of morning hours 
+    public Schedule getHighestRankedScheduleOption() { //returns schedule with least amount of morning hours 
         return schedulesHashMap.get(sortedSchedulesArray[0]);
     }
 
     @Override
-    public Schedule getLowestRankedScheduleOption() { //returns schedule with the least amount of hours before 12
+    public Schedule getLowestRankedScheduleOption() { //returns schedule with the most amount of hours before 12
         return schedulesHashMap.get(sortedSchedulesArray[sortedSchedulesArray.length - 1]);
     }
 
-    public double ScheduleRanker(Schedule schedule) {  //returns total number of hours before 12 for a certain schedule
+    public double ScheduleRanker(Schedule schedule) { //returns total number of hours before 12 for a certain schedule
         HashMap<Integer, ArrayList<int[]>> times = schedule.getClassTimes();
         double rankingpoints = 0.0;
         for (ArrayList<int[]> day: times.values()) {

@@ -6,6 +6,8 @@ import java.sql.SQLException;
 
 public class DBConnection {
     private static final String DB_URL = "jdbc:sqlite:./courses.db";
+
+    //Method for establishing connection to the SQLite courses database
     public static Connection getConnection() {
         Connection connection = null;
         try {

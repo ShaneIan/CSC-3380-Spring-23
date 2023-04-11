@@ -49,7 +49,7 @@ public class FormHandler implements HttpHandler{
                         "<a href=\"https://sso.paws.lsu.edu/login?service=https%3A%2F%2Fmylsu.apps.lsu.edu%2Fc%2Fportal%2Flogin\">" +
                         "<img src=\"https://logolook.net/wp-content/uploads/2022/02/LSU-Tigers-Logo-1955-768x432.png\" alt=\"Mikey\" style=\"object-position:right; width: 400px; float: right;\"></a></div></header>");
             responseHTML.append("<div><h1 style=\"color: white;\">LSU Automatic Scheduler</h1></div>");
-            responseHTML.append("<form><input type=\"button\" value=\"Back\" onclick=\"history.back()\"></form>");
+            responseHTML.append("<form><input type=\"button\" style=\"border-radius: 6px; margin-top: 5px;\" value=\"Back\" onclick=\"history.back()\"></form>");
             
             //Handle Html result when there is only 1 viable schedule
             if (viableSchedules.size() == 1) {
@@ -86,6 +86,7 @@ public class FormHandler implements HttpHandler{
         }
     }
 
+    //Take form search data, format correctly, and push each search box entry as a course code abbreviation and number pair
     private Map<String, String> parseFormData(String request) {
         Map<String, String> formData = new HashMap<>();
         String[] pairs = request.split("&");

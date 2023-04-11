@@ -15,22 +15,23 @@ public class ScheduleTableBuilder {
         buildTable(schedule);
     }
 
+    //Converts a schedule's matrix to an html table that displays the time of every course for every day
     private void buildTable(Schedule schedule) {
         ArrayList<Course> courses = schedule.getCourses();
         String[][] scheduleMatrix = schedule.getScheduleMatrix();
         for (Course course: courses) {
             htmlTable.append("<p>" + course.toString() + "</p>");
         }
-        //Add day headings to Table
+        //Add day headings to the schedule table
         htmlTable.append("<table><tr><th></th><th>M</th><th>T</th><th>W</th><th>TH</th><th>F</th></tr>");
         int colorInd = 0;
         Map<String, String> classColorMap = new HashMap<>();
         for (int timeInd = 0; timeInd < scheduleMatrix[0].length; timeInd++) {
             htmlTable.append("<tr>");
             htmlTable.append("<td>" + TIMESLOTS[timeInd] + "</td>");
-
             for (int dayInd = 0; dayInd < scheduleMatrix.length -1; dayInd++) {
                 if (!scheduleMatrix[dayInd][timeInd].equals("-")) {
+                    //Check if colorMap color has been used, if so, set time slot to correct color, if not, set the course to an unused color
                     if (classColorMap.containsKey(scheduleMatrix[dayInd][timeInd])) {
                         htmlTable.append("<td style=\"background-color: " + classColorMap.get(scheduleMatrix[dayInd][timeInd]) + "\">" + scheduleMatrix[dayInd][timeInd] + "</td>");
                     }
