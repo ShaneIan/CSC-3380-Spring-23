@@ -47,15 +47,12 @@ public class ScheduleTimeAnalyzer implements ScheduleAnalyzer{
 
     @Override
     public Schedule getHighestRankedScheduleOption() { //returns schedule with most amount of morning hours 
-        throw new UnsupportedOperationException("Unimplemented method 'rateSchedule'");
-        //return schedulesHashMap.get(sortedSchedulesArray[0]);
+        return schedulesHashMap.get(sortedSchedulesArray[0]);
     }
 
     @Override
     public Schedule getLowestRankedScheduleOption() { //returns schedule with the least amount of hours before 12
-        
-        throw new UnsupportedOperationException("Unimplemented method 'rateSchedule'");
-        //return schedulesHashMap.get(sortedSchedulesArray[sortedSchedulesArray.length - 1]);
+        return schedulesHashMap.get(sortedSchedulesArray[sortedSchedulesArray.length - 1]);
     }
 
     public double ScheduleRanker(Schedule schedule) {  //returns total number of hours before 12 for a certain schedule
