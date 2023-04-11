@@ -42,19 +42,17 @@ public class ScheduleSpreadAnalyzer implements ScheduleAnalyzer{
     }
 
     @Override
-    public void getHighestRankedScheduleOption() {
+    public Schedule getHighestRankedScheduleOption() {
         // public schedule getHighest user .get()
         // Get schedule with least time between classes, i.e., schedule with least time spread
-        throw new UnsupportedOperationException("Unimplemented method 'getBestScheduleOption'");
-        //return schedulesHashMap.get(sortedSchedulesArray[0]);
+        return schedulesHashMap.get(sortedSchedulesArray[0]);
 
     }
 
     @Override
-    public void getLowestRankedScheduleOption() {
+    public Schedule getLowestRankedScheduleOption() {
         // Get schedule with most time between classes, i.e., schedule with most time spread
-        throw new UnsupportedOperationException("Unimplemented method 'getLowestRankedScheduleOption'");
-        //return schedulesHashMap.get(sortedSchedulesArray[sortedSchedulesArray.length - 1]);
+        return schedulesHashMap.get(sortedSchedulesArray[sortedSchedulesArray.length - 1]);
 
     }
 
