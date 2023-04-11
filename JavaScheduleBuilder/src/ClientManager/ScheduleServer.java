@@ -13,6 +13,6 @@ public class ScheduleServer {
 
       server.start();
 
-      System.out.println("Server started on port 8000");
+      System.out.println("Server started");
   }
 }
