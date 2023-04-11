@@ -1,18 +1,24 @@
 package ScheduleObjectBuilder;
 import java.util.*; 
 import CourseObjectBuilder.*;
-//import ScheduleAnalyzer.*;
+import ScheduleAnalyzer.*;
 
 public class ScheduleDirector {
         private Course[][] allCourseAndSections;
         private ArrayList<Schedule> viableSchedules;
-        //private ScheduleSpreadAnalyzer timeSpreadRanker;
-        //private ScheduleTimeAnalyzer timeDensityRanker;
+        private ScheduleSpreadAnalyzer spreadRanker;
+        private ScheduleTimeAnalyzer timeRanker;
 
         public ScheduleDirector(ScheduleBuilderImpl schedbldr, Course[][] courses) {
                 allCourseAndSections = courses;
                 viableSchedules = new ArrayList<>();
                 findViableSchedules(schedbldr);
+                Schedule[] viableSchedArr = new Schedule[viableSchedules.size()];
+                for (int i = 0; i < viableSchedArr.length; i++) {
+                        viableSchedArr[i] = viableSchedules.get(i);
+                }
+                spreadRanker = new ScheduleSpreadAnalyzer(viableSchedArr);
+                timeRanker = new ScheduleTimeAnalyzer(viableSchedArr);
         }
 
         public void findViableSchedules(ScheduleBuilderImpl schedbldr) {
@@ -50,5 +56,13 @@ public class ScheduleDirector {
 
         public ArrayList<Schedule> returnViableSchedules() {
                 return viableSchedules;
+        }
+
+        public ScheduleSpreadAnalyzer getSpreadAnalyzer() {
+                return spreadRanker;
+        }
+
+        public ScheduleTimeAnalyzer getMorningAnalyzer() {
+                return timeRanker;
         }
 }

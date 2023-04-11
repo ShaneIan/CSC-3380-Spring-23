@@ -8,8 +8,8 @@ public class ScheduleTimeAnalyzer implements ScheduleAnalyzer{
     int[] sortedSchedulesArray;
 
 
-    public ScheduleTimeAnalyzer(Schedule[] schedules) {
-        schedules = this.schedules;
+    public ScheduleTimeAnalyzer(Schedule[] viableSchedules) {
+        schedules = viableSchedules;
         for(int i = 0; i < schedules.length; i++){  //key:original index in schedules value: schedule 
             schedulesHashMap.put(i, schedules[i]);
         }
@@ -17,7 +17,6 @@ public class ScheduleTimeAnalyzer implements ScheduleAnalyzer{
     }
 
     @Override
-
     public void rankScheduleOptions() {  //returns a sorted array of key values for schedulesHashMap based on morning rank
         
         //throw new UnsupportedOperationException("Unimplemented method 'rateSchedule'");
@@ -30,15 +29,17 @@ public class ScheduleTimeAnalyzer implements ScheduleAnalyzer{
         }
         
         int n = schedules.length;
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
-                if (arrayOfRanks[j] < arrayOfRanks[j + 1]) {
-                    double tempR = arrayOfRanks[j];
-                    arrayOfRanks[j] = arrayOfRanks[j + 1];
-                    arrayOfRanks[j + 1] = tempR;
-                    int tempK = arrayOfKeys[j];
-                    arrayOfKeys[j] = arrayOfKeys[j + 1];
-                    arrayOfKeys[j + 1] = tempK;
+        if (n > 1) {
+            for (int i = 0; i < n - 1; i++) {
+                for (int j = 0; j < n - i - 1; j++) {
+                    if (arrayOfRanks[j] < arrayOfRanks[j + 1]) {
+                        double tempR = arrayOfRanks[j];
+                        arrayOfRanks[j] = arrayOfRanks[j + 1];
+                        arrayOfRanks[j + 1] = tempR;
+                        int tempK = arrayOfKeys[j];
+                        arrayOfKeys[j] = arrayOfKeys[j + 1];
+                        arrayOfKeys[j + 1] = tempK;
+                    }
                 }
             }
         }
@@ -56,7 +57,20 @@ public class ScheduleTimeAnalyzer implements ScheduleAnalyzer{
     }
 
     public double ScheduleRanker(Schedule schedule) {  //returns total number of hours before 12 for a certain schedule
-        double rankingpoints = schedule.getNumberHoursBeforeTwelve(); 
+        HashMap<Integer, ArrayList<int[]>> times = schedule.getClassTimes();
+        double rankingpoints = 0.0;
+        for (ArrayList<int[]> day: times.values()) {
+            for (int[] classTime: day) {
+                double startTime = classTime[0];
+                double endTime = classTime[1];
+                if (startTime > 10) {  //shouldnt this be <
+                    while (startTime < endTime) {
+                        rankingpoints += 0.5;
+                        startTime++;
+                    }
+                }
+            }
+        }
         return rankingpoints;    
     }
 }

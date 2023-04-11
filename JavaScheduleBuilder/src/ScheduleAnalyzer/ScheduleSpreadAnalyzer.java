@@ -7,8 +7,8 @@ public class ScheduleSpreadAnalyzer implements ScheduleAnalyzer{
     HashMap<Integer, Schedule> schedulesHashMap =  new HashMap<Integer, Schedule>();
     int[] sortedSchedulesArray;
 
-    public ScheduleSpreadAnalyzer(Schedule[] schedules) {
-        schedules = this.schedules;
+    public ScheduleSpreadAnalyzer(Schedule[] viableschedules) {
+        schedules = viableschedules;
         for(int i = 0; i < schedules.length; i++){  //key:original index in schedules value: schedule 
             schedulesHashMap.put(i, schedules[i]);
         }
@@ -18,33 +18,35 @@ public class ScheduleSpreadAnalyzer implements ScheduleAnalyzer{
     @Override
     public void rankScheduleOptions() {
         // Rank all schedules by least to greatest time between classes, summed over each day
-        //throw new UnsupportedOperationException("Unimplemented method 'rankScheduleOptions'");
         int[] arrayOfKeys = new int[schedules.length];
         double[] arrayOfRanks = new double[schedules.length];
         for (int i = 0; i < schedules.length; i++){
             arrayOfKeys[i] = i;
-            arrayOfRanks[i] = ScheduleRanker(schedules[i]); //this could be schedules[i].getNumberHoursBeforeTwelve
-
+            arrayOfRanks[i] = ScheduleRanker(schedules[i]);
         }
         int n = schedules.length;
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
-                if (arrayOfRanks[j] < arrayOfRanks[j + 1]) {
-                    double tempR = arrayOfRanks[j];
-                    arrayOfRanks[j] = arrayOfRanks[j + 1];
-                    arrayOfRanks[j + 1] = tempR;
-                    int tempK = arrayOfKeys[j];
-                    arrayOfKeys[j] = arrayOfKeys[j + 1];
-                    arrayOfKeys[j + 1] = tempK;
+        if (n > 1) {
+            for (int i = 0; i < n - 1; i++) {
+                for (int j = 0; j < n - i - 1; j++) {
+                    if (arrayOfRanks[j] < arrayOfRanks[j + 1]) {
+                        double tempR = arrayOfRanks[j];
+                        arrayOfRanks[j] = arrayOfRanks[j + 1];
+                        arrayOfRanks[j + 1] = tempR;
+                        int tempK = arrayOfKeys[j];
+                        arrayOfKeys[j] = arrayOfKeys[j + 1];
+                        arrayOfKeys[j + 1] = tempK;
+                    }
                 }
             }
         }
+        sortedSchedulesArray = arrayOfKeys;
     }
 
     @Override
     public Schedule getHighestRankedScheduleOption() {
         // public schedule getHighest user .get()
         // Get schedule with least time between classes, i.e., schedule with least time spread
+        System.out.println(Arrays.toString(sortedSchedulesArray));
         return schedulesHashMap.get(sortedSchedulesArray[0]);
 
     }
@@ -57,7 +59,17 @@ public class ScheduleSpreadAnalyzer implements ScheduleAnalyzer{
     }
 
     public double ScheduleRanker(Schedule schedule) {  //returns total number of hours before 12 for a certain schedule
-        double rankingpoints = schedule.getNumberHoursOfGap(); 
+        HashMap<Integer, ArrayList<int[]>> times = schedule.getClassTimes();
+        double rankingpoints = 0.0;
+        for (int day = 0; day <= 4; day++){
+            ArrayList<int[]> classes = times.get(day);
+            int numberClasses = classes.size();
+            for (int i = 1; i < numberClasses; i++){
+                int[] classPrevious = classes.get(i-1);
+                int[] classCurrent = classes.get(i);
+                rankingpoints = classPrevious[1] - classCurrent[0];
+            }
+        }
         return rankingpoints;     
     }
 

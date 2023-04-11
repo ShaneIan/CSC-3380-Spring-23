@@ -33,10 +33,51 @@ public class FormHandler implements HttpHandler{
             }
             System.out.println("\n");
             DataManager DataMngr= new DataManager(coursesSearched);
+            System.out.println("Data manager made successfully");
             ArrayList<Schedule> viableSchedules = DataMngr.getViableSchedules();
-            response += new ScheduleTableBuilder(viableSchedules).returnTableString();
-            // send the response
+
+            //Setting style and basic elements of HTML response string
+            StringBuilder responseHTML = new StringBuilder().append("<html>");
+            responseHTML.append("<head><style>");
+            responseHTML.append("body { background-color: rgb(48, 20, 86); } "+
+                        "header {}" +
+                        "table { background-color: white; border-collapse: separate; border-spacing: 0px 0px; } " +
+                        "th, td { text-align: center; border: 1px solid black; width:10%;} " +
+                        "p { color: white;}"); // Add padding to <th> tags
+            responseHTML.append("</style></head><body><header><div><a href=\"https://www.lsu.edu\">" +
+                        "<img src=\"https://www.lsu.edu/_resources_fierce/svgs/lsu-logo.svg\" alt=\"Louisiana State University\" style=\"object-position: left;width: 250px;\"></a>"+
+                        "<a href=\"https://sso.paws.lsu.edu/login?service=https%3A%2F%2Fmylsu.apps.lsu.edu%2Fc%2Fportal%2Flogin\">" +
+                        "<img src=\"https://logolook.net/wp-content/uploads/2022/02/LSU-Tigers-Logo-1955-768x432.png\" alt=\"Mikey\" style=\"object-position:right; width: 400px; float: right;\"></a></div></header>");
+            responseHTML.append("<div><h1 style=\"color: white;\">LSU Automatic Scheduler</h1></div>");
+            responseHTML.append("<form><input type=\"button\" value=\"Back\" onclick=\"history.back()\"></form>");
             
+            //Handle Html result when there is only 1 viable schedule
+            if (viableSchedules.size() == 1) {
+                responseHTML.append("<div><h2 style=\"color: white;\">Your course search returned one schedule option:</h2></div>");
+                responseHTML.append(new ScheduleTableBuilder(viableSchedules.get(0)).returnTableString());
+            }
+            
+            //Handle Html result when there are several viable schedules that can be ranked
+            else if (viableSchedules.size() > 1) {
+                responseHTML.append("<div><h2 style=\"color: white;\">Your course search returned " + viableSchedules.size() + " schedule configurations. Here are the highest ranked options:</h2></div>");
+                responseHTML.append("<p>Morning Course Heavy Schedule</p>");
+                responseHTML.append(new ScheduleTableBuilder(DataMngr.getLowestRankedMorningSched()).returnTableString());
+                responseHTML.append("<p>Afternoon Course Heavy Schedule</p>");
+                responseHTML.append(new ScheduleTableBuilder(DataMngr.getHighestRankedMorningSched()).returnTableString());
+                responseHTML.append("<p>Schedule with Minimal Time Between Courses</p>");
+                responseHTML.append(new ScheduleTableBuilder(DataMngr.getLowestRankedSpreadSched()).returnTableString());
+                responseHTML.append("<p>Schedule with Maximal Time Between Courses</p>");
+                responseHTML.append(new ScheduleTableBuilder(DataMngr.getHighestRankedSpreadSched()).returnTableString());
+            }
+
+            //Handle Html result when there are no schedules that fit the courses searched
+            else {
+                responseHTML.append("<div><p>There were no schedules that fit the courses searched. Try a different search.</p></div>");
+            }
+            responseHTML.append("</body></html>");
+            response += responseHTML.toString();
+
+            // send the response
             exchange.sendResponseHeaders(200, response.length());
             OutputStream output = exchange.getResponseBody();
             output.write(response.getBytes());

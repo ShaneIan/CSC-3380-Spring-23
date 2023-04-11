@@ -9,6 +9,10 @@ public class DataManager {
     private DatabaseOperations dbOpr;
     private ScheduleDirector scheduleDir;
     private ArrayList<Schedule> viableSchedules;
+    private Schedule highestRankedMorning;
+    private Schedule lowestRankedMorning;
+    private Schedule highestRankedSpread;
+    private Schedule lowestRankedSpread;
     
     public DataManager(ArrayList<String> searchedCourses) {
         dbOpr = new DatabaseOperations();
@@ -18,12 +22,23 @@ public class DataManager {
             ScheduleBuilderImpl scheduleBldr = new ScheduleBuilderImpl();
             scheduleDir = new ScheduleDirector(scheduleBldr, coursesQueried);
             viableSchedules = scheduleDir.returnViableSchedules();
+            highestRankedMorning = scheduleDir.getMorningAnalyzer().getHighestRankedScheduleOption();
+            lowestRankedMorning = scheduleDir.getMorningAnalyzer().getLowestRankedScheduleOption();
+            highestRankedSpread = scheduleDir.getSpreadAnalyzer().getHighestRankedScheduleOption();
+            System.out.println("getHighestRankedScheduleOption worked");
+            lowestRankedSpread = scheduleDir.getSpreadAnalyzer().getLowestRankedScheduleOption();
+            System.out.println("this worked");
         }
         else {
             coursesQueried = null;
             scheduleDir = null;
             viableSchedules = new ArrayList<>();
+            highestRankedMorning = null;
+            lowestRankedMorning = null;
+            highestRankedSpread = null;
+            lowestRankedSpread = null;
         }
+        System.out.println("Made data manager success");
     }
 
     //Take ArrayList<String> from html form, convert each string from
@@ -77,6 +92,22 @@ public class DataManager {
 
     public ArrayList<Schedule> getViableSchedules() {
         return viableSchedules;
+    }
+
+    public Schedule getHighestRankedMorningSched() {
+        return highestRankedMorning;
+    }
+
+    public Schedule getLowestRankedMorningSched() {
+        return lowestRankedMorning;
+    }
+
+    public Schedule getHighestRankedSpreadSched() {
+        return highestRankedSpread;
+    }
+
+    public Schedule getLowestRankedSpreadSched() {
+        return lowestRankedSpread;
     }
 
 }
